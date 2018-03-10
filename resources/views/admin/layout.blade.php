@@ -18,6 +18,7 @@
 
     <link href="/base/css/animate.min.css?v={{config("sys.version")}}"  rel="stylesheet">
     <link href="/base/css/style.min.css?v={{config("sys.version")}}" rel="stylesheet">
+    <link href="/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css" rel="stylesheet">
 
     <!-- fine-uploader -->
 <!--     <link rel="stylesheet" href="/base/plugins/fine-uploader/fine-uploader-new.min.css"> -->
@@ -30,6 +31,7 @@
     <script src="/base/js/bootstrap.min.js?v=3.4.0" ></script>
     <script src="/base/js/layer/layer.js?v={{config("sys.version")}}"></script>
 
+
     @yield('header')
 </head>
 
@@ -39,7 +41,7 @@
     <!-- layer Date -->
     <script src="/base/js/laydate/laydate.js?v={{config("sys.version")}}" type="text/javascript" ></script>
     <script type="text/javascript"> !function(){ laydate.skin('molv'); }(); </script>
-    
+
     <!-- 自定义js -->
     <script src="/base/js/content.min.js?v=1.0.0" ></script>
 
@@ -52,6 +54,8 @@
     <script src="/base/js/jquery.tableSort.js?v={{config("sys.version")}}" ></script>
 <!--     <script src="/base/plugins/fine-uploader/fine-uploader.min.js"></script> -->
     <script src="/base/plugins/cropperjs/cropper.min.js"></script>
+    <script src="/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="/bootstrap-datepicker/dist/locales/bootstrap-datepicker.zh-CN.min.js"></script>
     <script>
         $.ajaxSetup({
             headers: { 'X-CSRF-TOKEN' : '{{ csrf_token() }}' }
@@ -79,10 +83,10 @@
 		$(".dataTable").tableSort(['sorting','sorting_asc','sorting_desc']);
 		$().ready(function() {
 			$("#form-validation").validate();
-			
+
 		});
 	</script>
-	
+
     @yield('footer')
 </body>
 

@@ -50,6 +50,12 @@
                                 </div>
                             </div>
                             <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">二维码</label>
+                                <div class="col-sm-6">
+                                    {!!  widget('Tools.ImgUpload')->single2('/upload/qrcode','img','img', isset($item->img)? $item->img : "") !!}
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">商家名称</label>
                                 <div class="col-sm-6">
                                     <input class="form-control" type="text" name="name" value="{{ $item->name }}" placeholder="请输入商家名称" required>

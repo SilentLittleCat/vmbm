@@ -6,6 +6,7 @@ use App\Models\AD;
 use App\Models\Device;
 use App\Models\Fan;
 use App\Models\Tissue;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -15,23 +16,72 @@ class TissueController extends Controller
 {
     public function index(Request $request)
     {
-        $list = Tissue::where('id', '>', 0);
-        $fan = null;
-        if($request->has('fan_id') && ($fan = Fan::find($request->input('fan_id'))) != null) {
-            $list = $list->where('fan_id', $request->input('fan_id'));
-        }
         if($request->has('keyword') && $request->input('keyword')) {
             $keyword = $request->input('keyword');
-            $list = $list->with(['fan', 'device'])->orderBy('updated_at', 'desc')->get()->filter(function ($value) use($keyword) {
-                if($value->fan && !(strpos($value->fan->wechat_name, $keyword) === false)) return true;
-                if($value->device && !(strpos($value->device->IMEI, $keyword) === false)) return true;
+            $list = Device::with(['client'])->orderBy('updated_at', 'desc')->get()->filter(function ($value) use($keyword) {
+                if(!(strpos($value->name, $keyword) === false)) return true;
+                if($value->client && !(strpos($value->client->name, $keyword) === false)) return true;
                 return false;
             });
             $list = $this->paginate($list);
         } else {
-            $list = $list->orderBy('updated_at', 'desc')->paginate();
+            $list = Device::with(['client'])->orderBy('updated_at', 'desc')->paginate();
         }
-        return view('admin.tissue.index', compact('list', 'fan'));
+        $items = $list->items();
+        if($request->has('begin_date') || $request->has('end_date')) {
+            if(!$request->has('begin_date')) {
+                $begin_date = Carbon::createFromDate(2000, 1, 1)->toDateTimeString();
+            } else {
+                $begin_date = $request->input('begin_date');
+                $begin_date = implode('-', $begin_date);
+                $begin_date = Carbon::createFromDate($begin_date[0], $begin_date[1], $begin_date[2])->toDateTimeString();
+            }
+            if(!$request->has('end_date')) {
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            } else {
+                $end_date = $request->input('end_date');
+                $end_date = implode('-', $end_date);
+                $end_date = Carbon::createFromDate($end_date[0], $end_date[1], $end_date[2])->toDateTimeString();
+            }
+        } else if($request->has('date')) {
+            if($request->input('date') == 'three_day') {
+                $begin_date = Carbon::now()->subDays(2)->toDateTimeString();
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            } else if($request->input('date') == 'seven_day') {
+                $begin_date = Carbon::now()->subDays(6)->toDateTimeString();
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            } else if($request->input('date') == 'this_month') {
+                $now = Carbon::now();
+                $begin_date = Carbon::createFromDate($now->year, $now->month, 1)->toDateTimeString();
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            } else if($request->input('date') == 'last_month') {
+                $last_month = Carbon::now()->subMonth();
+                $begin_date = Carbon::createFromDate($last_month->year, $last_month->month, 1)->toDateTimeString();
+                $now = Carbon::now();
+                $begin_date = Carbon::createFromDate($now->year, $now->month, 1)->toDateTimeString();
+            } else {
+                $begin_date = Carbon::today()->toDateTimeString();
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            }
+        } else {
+            $begin_date = Carbon::today()->toDateTimeString();
+            $end_date = Carbon::tomorrow()->toDateTimeString();
+        }
+        foreach($items as $item) {
+            $item->buy_cnt = Tissue::where([
+                ['device_id', '=', $item->id],
+                ['status', '=', 1],
+                ['created_at', '>=', $begin_date],
+                ['created_at', '<=', $end_date]
+            ])->get()->count();
+            $item->get_cnt = Tissue::where([
+                ['device_id', '=', $item->id],
+                ['status', '=', 0],
+                ['created_at', '>=', $begin_date],
+                ['created_at', '<=', $end_date]
+            ])->get()->count();
+        }
+        return view('admin.tissue.index', compact('list', 'fan', 'items'));
     }
 
     public function paginate($items, $perPage = 25, $page = null, $options = [])

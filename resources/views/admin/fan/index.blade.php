@@ -84,7 +84,7 @@
                                         <td>{{ $item->num - $item->buy_num }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <div class="btn btn-sm btn-default btn-tissue" data-id="{{ $item->id }}">纸巾</div>
+                                                {{--<div class="btn btn-sm btn-default btn-tissue" data-id="{{ $item->id }}">纸巾</div>--}}
                                                 <div class="btn btn-sm btn-info btn-detail" data-id="{{ $item->id }}">详情</div>
                                                 <div class="btn btn-sm btn-primary btn-edit" data-id="{{ $item->id }}">编辑</div>
                                                 <div class="btn btn-sm btn-danger btn-delete" data-id="{{ $item->id }}">删除</div>

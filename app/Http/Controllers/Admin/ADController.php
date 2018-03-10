@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Validator;
 
 class ADController extends Controller
 {
@@ -41,6 +42,21 @@ class ADController extends Controller
         $data = $request->all();
         if(!isset($data['data']['img'])) {
             return back()->withErrors(collect(['必须上传公众号二维码']));
+        }
+        $validator = Validator::make($data, [
+            'tel' => 'required|digits:11',
+            'money' => 'required|integer',
+            'limit' => 'required|integer',
+            'day_limit' => 'required|integer'
+        ], [
+            'tel.required' => '电话必填',
+            'tel.digits' => '电话为11位',
+            'money.integer' => '充值金额为整数',
+            'limit.integer' => '吸粉数上限为整数',
+            'day_limit.integer' => '日吸粉数上限为整数'
+        ]);
+        if($validator->fails()) {
+            return back()->withErrors($validator->errors());
         }
         $data['img'] = $data['data']['img'];
         unset($data['data']);
@@ -77,9 +93,30 @@ class ADController extends Controller
     public function update(Request $request)
     {
         if($request->method() != 'POST') return back();
+        $data = $request->all();
+        if(!isset($data['data']['img'])) {
+            return back()->withErrors(collect(['必须上传公众号二维码']));
+        }
+        $validator = Validator::make($request->all(), [
+            'tel' => 'required|digits:11',
+            'money' => 'required|integer',
+            'limit' => 'required|integer',
+            'day_limit' => 'required|integer'
+        ], [
+            'tel.required' => '电话必填',
+            'tel.digits' => '电话为11位',
+            'money.integer' => '充值金额为整数',
+            'limit.integer' => '吸粉数上限为整数',
+            'day_limit.integer' => '日吸粉数上限为整数'
+        ]);
+        if($validator->fails()) {
+            return back()->withErrors($validator->errors());
+        }
         if(!$request->has('id') || ($item = AD::find($request->input('id'))) == null) return $this->showWarning('找不到广告！');
         $arr = $request->all();
         unset($arr['_token']);
+        unset($arr['data']);
+        unset($arr['file']);
         $res = AD::where('id', $request->input('id'))->update($arr);
         if(!$res) return $this->showWarning('数据库更新失败！');
         return $this->showMessage('更新成功！', '/admin/AD/index');

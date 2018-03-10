@@ -26,7 +26,7 @@
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>{{ $fan ? $fan->wechat_name . '的纸巾列表' : '纸巾列表' }}</h5>
+                        <h5>设备纸巾销售领取统计</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link"> <i class="fa fa-chevron-up"></i>
                             </a>
@@ -35,58 +35,54 @@
                     <div class="ibox-content">
                         <div class="row">
                             <form method="GET" action="" accept-charset="UTF-8">
-
-                                <div class="col-sm-4">
-                                    <div class="input-group">
-                                        <input type="text" value="{{ Request::get('keyword') }}" placeholder="请输入微信/设备（IMEI）进行搜索" name="keyword"class="input-sm form-control">
-                                        <span class="input-group-btn">
-									<button type="submit" class="btn btn-sm btn-primary">搜索</button>
-								</span>
-                                    </div>
+                                <div class="col-sm-3">
+                                    <input type="text" value="{{ Request::get('keyword') }}" placeholder="请输入设备名/客户名进行搜索" name="keyword"class="input-sm form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <select class="input-sm form-control" name="date">
+                                        <option value="today">当天</option>
+                                        <option value="three_day">最近三天</option>
+                                        <option value="seven_day">最近七天</option>
+                                        <option value="this_month">本月</option>
+                                        <option value="last_month">上月</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" value="{{ Request::get('begin_date') }}" placeholder="开始日期" name="begin_date"class="input-sm form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="text" value="{{ Request::get('end_date') }}" placeholder="结束日期" name="end_date"class="input-sm form-control">
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="submit" class="btn btn-sm btn-primary">搜索</button>
                                 </div>
                             </form>
-                            <div class="col-sm-3 pull-right">
-                                <a href="{{ U('Tissue/create')}}" class="btn btn-sm btn-primary pull-right">添加</a>
-                            </div>
+                            {{--<div class="col-sm-3 pull-right">--}}
+                                {{--<a href="{{ U('Tissue/create')}}" class="btn btn-sm btn-primary pull-right">添加</a>--}}
+                            {{--</div>--}}
                         </div>
                         {{--表格开始--}}
                         <table class="table table-striped table-bordered table-hover dataTable" id="sg-table">
                             <thead>
                             <tr>
-                                <th>粉丝微信</th>
+                                <th>客户</th>
                                 <th>设备（IMEI）</th>
-                                <th>状态</th>
-                                <th>时间</th>
-                                <th>备注</th>
-                                <th>操作</th>
+                                <th>销售纸巾数</th>
+                                <th>领取纸巾数</th>
                             </tr>
                             </thead>
                             <tbody>
                             @if(count($list) == 0)
                                 <tr>
-                                    <td colspan="6" class="sg-centered">暂无纸巾购买/领取信息！</td>
+                                    <td colspan="4" class="sg-centered">暂无纸巾购买/领取信息！</td>
                                 </tr>
                             @else
-                                @foreach($list as $item)
+                                @foreach($items as $item)
                                     <tr>
-                                        <td>{{ $item->fan ? $item->fan->wechat_name : '' }}</td>
+                                        <td>{{ $item->client->name }}</td>
                                         <td>{{ $item->device ? $item->device->IMEI : '' }}</td>
-                                        <td>
-                                            @if($item->status == 0)
-                                                <span class="label label-success">领取</span>
-                                            @else
-                                                <span class="label label-danger">购买</span>
-                                            @endif
-                                        </td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>{{ $item->info }}</td>
-                                        <td>
-                                            <div class="btn-group">
-                                                <div class="btn btn-sm btn-info btn-detail" data-id="{{ $item->id }}">详情</div>
-                                                <div class="btn btn-sm btn-primary btn-edit" data-id="{{ $item->id }}">编辑</div>
-                                                <div class="btn btn-sm btn-danger btn-delete" data-id="{{ $item->id }}">删除</div>
-                                            </div>
-                                        </td>
+                                        <td>{{ $item->buy_cnt }}</td>
+                                        <td>{{ $item->get_cnt }}</td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -137,22 +133,7 @@
 @section('footer')
     <script type="text/javascript">
         $(function() {
-            $('#sg-table').on('click', '.btn-delete', function () {
-                var url = "{{ U('Tissue/destroy') }}" + '?id=' + $(this).attr('data-id');
-                $('#sg-form').attr('action', url);
-                $('#my-modal-label').text('确认删除？');
-                $('#my-modal').modal('show');
-            }).on('click', '.btn-detail', function () {
-                var url = "{{ U('Tissue/detail') }}" + '?id=' + $(this).attr('data-id');
-                window.location = url;
-            }).on('click', '.btn-edit', function () {
-                var url = "{{ U('Tissue/edit') }}" + '?id=' + $(this).attr('data-id');
-                window.location = url;
-            });
 
-            $('#my-modal-confirm-btn').on('click', function () {
-                $('#sg-form').submit();
-            });
         });
     </script>
 @endsection
