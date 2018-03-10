@@ -106,7 +106,7 @@
                                         <td>{{ $item->client ? $item->client->phone : '无' }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                @if(Auth::guard('admin')->name == 'admin')
+                                                @if(Auth::guard('admin')->user()->name == 'admin')
                                                     <div class="btn btn-sm btn-success {{ $item->auth_status == 1 ? 'disabled' : '' }} btn-pass" data-id="{{ $item->id }}">审核通过</div>
                                                     <div class="btn btn-sm btn-warning {{ $item->auth_status == 2 ? 'disabled' : '' }} btn-not-pass" data-id="{{ $item->id }}">审核不过</div>
                                                 @endif
