@@ -80,7 +80,7 @@
                                 @foreach($items as $item)
                                     <tr>
                                         <td>{{ $item->client->name }}</td>
-                                        <td>{{ $item->device ? $item->device->IMEI : '' }}</td>
+                                        <td>{{ $item->IMEI }}</td>
                                         <td>{{ $item->buy_cnt }}</td>
                                         <td>{{ $item->get_cnt }}</td>
                                     </tr>
