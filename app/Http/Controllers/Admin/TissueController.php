@@ -33,14 +33,14 @@ class TissueController extends Controller
                 $begin_date = Carbon::createFromDate(2000, 1, 1)->toDateTimeString();
             } else {
                 $begin_date = $request->input('begin_date');
-                $begin_date = implode('-', $begin_date);
+                $begin_date = explode('-', $begin_date);
                 $begin_date = Carbon::createFromDate($begin_date[0], $begin_date[1], $begin_date[2])->toDateTimeString();
             }
             if(!$request->has('end_date')) {
                 $end_date = Carbon::tomorrow()->toDateTimeString();
             } else {
                 $end_date = $request->input('end_date');
-                $end_date = implode('-', $end_date);
+                $end_date = explode('-', $end_date);
                 $end_date = Carbon::createFromDate($end_date[0], $end_date[1], $end_date[2])->toDateTimeString();
             }
         } else if($request->has('date')) {
