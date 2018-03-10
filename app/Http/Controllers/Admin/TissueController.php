@@ -28,22 +28,22 @@ class TissueController extends Controller
             $list = Device::with(['client'])->orderBy('updated_at', 'desc')->paginate();
         }
         $items = $list->items();
-        if($request->has('begin_date') || $request->has('end_date')) {
-            if(!$request->has('begin_date')) {
+        if(($request->has('begin_date') && $request->input('begin_date')) || ($request->has('end_date') && $request->input('end_date'))) {
+            if(!$request->has('begin_date') || $request->input('begin_date') == null) {
                 $begin_date = Carbon::createFromDate(2000, 1, 1)->toDateTimeString();
             } else {
                 $begin_date = $request->input('begin_date');
                 $begin_date = explode('-', $begin_date);
                 $begin_date = Carbon::createFromDate($begin_date[0], $begin_date[1], $begin_date[2])->toDateTimeString();
             }
-            if(!$request->has('end_date')) {
+            if(!$request->has('end_date') || $request->input('end_date') == null) {
                 $end_date = Carbon::tomorrow()->toDateTimeString();
             } else {
                 $end_date = $request->input('end_date');
                 $end_date = explode('-', $end_date);
                 $end_date = Carbon::createFromDate($end_date[0], $end_date[1], $end_date[2])->toDateTimeString();
             }
-        } else if($request->has('date')) {
+        } else if($request->has('date') && $request->input('date')) {
             if($request->input('date') == 'three_day') {
                 $begin_date = Carbon::now()->subDays(2)->toDateTimeString();
                 $end_date = Carbon::tomorrow()->toDateTimeString();

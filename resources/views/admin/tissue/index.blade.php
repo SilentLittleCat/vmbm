@@ -40,11 +40,11 @@
                                 </div>
                                 <div class="col-sm-2">
                                     <select class="form-control" name="date">
-                                        <option value="today">当天</option>
-                                        <option value="three_day">最近三天</option>
-                                        <option value="seven_day">最近七天</option>
-                                        <option value="this_month">本月</option>
-                                        <option value="last_month">上月</option>
+                                        <option value="today" {{ Request::get('date') == 'today' ? 'selected' : '' }}>当天</option>
+                                        <option value="three_day" {{ Request::get('date') == 'three_day' ? 'selected' : '' }}>最近三天</option>
+                                        <option value="seven_day" {{ Request::get('date') == 'seven_day' ? 'selected' : '' }}>最近七天</option>
+                                        <option value="this_month" {{ Request::get('date') == 'this_month' ? 'selected' : '' }}>本月</option>
+                                        <option value="last_month" {{ Request::get('date') == 'last_month' ? 'selected' : '' }}>上月</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
