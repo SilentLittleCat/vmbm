@@ -39,7 +39,7 @@
                                     <input type="text" value="{{ Request::get('keyword') }}" placeholder="请输入设备名/客户名进行搜索" name="keyword"class="input-sm form-control">
                                 </div>
                                 <div class="col-sm-2">
-                                    <select class="input-sm form-control" name="date">
+                                    <select class="form-control" name="date">
                                         <option value="today">当天</option>
                                         <option value="three_day">最近三天</option>
                                         <option value="seven_day">最近七天</option>
@@ -48,13 +48,13 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" class="input-sm form-control datepicker" value="{{ Request::get('begin_date') }}" placeholder="开始日期" name="begin_date"class="input-sm form-control">
+                                    <input type="text" class="form-control datepicker" value="{{ Request::get('begin_date') }}" placeholder="开始日期" name="begin_date"class="input-sm form-control">
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" class="input-sm form-control datepicker" value="{{ Request::get('end_date') }}" placeholder="结束日期" name="end_date"class="input-sm form-control">
+                                    <input type="text" class="form-control datepicker" value="{{ Request::get('end_date') }}" placeholder="结束日期" name="end_date"class="input-sm form-control">
                                 </div>
                                 <div class="col-sm-3">
-                                    <button type="submit" class="btn btn-sm btn-primary">搜索</button>
+                                    <button type="submit" class="btn btn-primary">搜索</button>
                                 </div>
                             </form>
                             {{--<div class="col-sm-3 pull-right">--}}
