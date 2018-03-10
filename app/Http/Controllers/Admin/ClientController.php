@@ -68,7 +68,7 @@ class ClientController extends Controller
             'phone.digits' => '手机号为11位数字'
         ]);
         if($validator->fails()) {
-            return back()->withErrors($validator->errors());
+            return back()->withErrors($validator->errors())->withInput();
         }
         if(!$request->has('id') || ($item = Client::find($request->input('id'))) == null) return $this->showWarning('找不到客户！');
         $arr = $request->all();
