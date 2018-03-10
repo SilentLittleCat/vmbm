@@ -39,31 +39,31 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">公司名称</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="company" value="{{ Request::get('company') }}" placeholder="请输入公司名称" required>
+                                    <input class="form-control" type="text" name="company" value="{{ old('company') }}" placeholder="请输入公司名称" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">企业信用代码</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="credit_code" value="{{ Request::get('credit_code') }}" placeholder="请输入企业信用代码">
+                                    <input class="form-control" type="text" name="credit_code" value="{{ old('credit_code') }}" placeholder="请输入企业信用代码">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">联系人</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="name" value="{{ Request::get('name') }}" placeholder="请输入客户名称" required>
+                                    <input class="form-control" type="text" name="name" value="{{ old('name') }}" placeholder="请输入客户名称" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">电话</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="phone" value="{{ Request::get('phone') }}" placeholder="请输入客户电话" required>
+                                    <input class="form-control" type="text" name="phone" value="{{ old('phone') }}" placeholder="请输入客户电话" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">密码</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="password" value="{{ Request::get('password') }}" placeholder="请输入客户密码" required>
+                                    <input class="form-control" type="text" name="password" value="{{ old('password') }}" placeholder="请输入客户密码" required>
                                 </div>
                             </div>
                             <div class="form-group">

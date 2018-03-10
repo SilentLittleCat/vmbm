@@ -36,7 +36,7 @@ class ClientController extends Controller
             'phone.digits' => '手机号为11位数字'
         ]);
         if($validator->fails()) {
-            return back()->withErrors($validator->errors());
+            return back()->withErrors($validator->errors())->withInput();
         }
         $res['password'] = bcrypt($res['password']);
         $res = Client::create($res);
