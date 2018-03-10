@@ -48,10 +48,10 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" value="{{ Request::get('begin_date') }}" placeholder="开始日期" name="begin_date"class="input-sm form-control">
+                                    <input type="text" class="input-sm form-control datepicker" value="{{ Request::get('begin_date') }}" placeholder="开始日期" name="begin_date"class="input-sm form-control">
                                 </div>
                                 <div class="col-sm-2">
-                                    <input type="text" value="{{ Request::get('end_date') }}" placeholder="结束日期" name="end_date"class="input-sm form-control">
+                                    <input type="text" class="input-sm form-control datepicker" value="{{ Request::get('end_date') }}" placeholder="结束日期" name="end_date"class="input-sm form-control">
                                 </div>
                                 <div class="col-sm-3">
                                     <button type="submit" class="btn btn-sm btn-primary">搜索</button>
@@ -133,7 +133,10 @@
 @section('footer')
     <script type="text/javascript">
         $(function() {
-
+            $('.datepicker').datepicker({
+                language: 'zh-CN',
+                format: "yyyy-mm-dd",
+            });
         });
     </script>
 @endsection
