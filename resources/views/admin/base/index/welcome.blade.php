@@ -70,7 +70,7 @@
                 <div class="col-sm-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <span class="label label-info pull-right">领取</span>
+                            <span class="label label-info pull-right">当天领取</span>
                             <h5>纸巾</h5>
                         </div>
                         <div class="ibox-content">
@@ -81,7 +81,7 @@
                 <div class="col-sm-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <span class="label label-primary pull-right">销售</span>
+                            <span class="label label-primary pull-right">当天销售</span>
                             <h5>纸巾</h5>
                         </div>
                         <div class="ibox-content">
@@ -92,7 +92,7 @@
                 <div class="col-sm-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <span class="label label-success pull-right">加粉</span>
+                            <span class="label label-success pull-right">当天加粉</span>
                             <h5>粉丝</h5>
                         </div>
                         <div class="ibox-content">
