@@ -40,7 +40,7 @@ class ADController extends Controller
         if($request->method() != 'POST') return back();
         $data = $request->all();
         if(!isset($data['data']['img'])) {
-            return back()->with(collect(['必须上传公众号二维码']));
+            return back()->withErrors(collect(['必须上传公众号二维码']));
         }
         $data['img'] = $data['data']['img'];
         unset($data['data']);
