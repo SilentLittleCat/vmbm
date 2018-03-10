@@ -131,7 +131,8 @@ class DeviceController extends Controller
         $url = $app->qrcode->url($item->ticket);
         $content = file_get_contents($url);
         return response($content, 200, [
-            'Content-Type' => 'application/jpg'
+            'Content-Type' => 'application/jpg',
+            'Content-Disposition' => 'attachment; filename="qrcode.jpg"',
         ]);
     }
 }

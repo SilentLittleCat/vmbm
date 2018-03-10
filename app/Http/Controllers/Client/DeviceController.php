@@ -112,6 +112,10 @@ class DeviceController extends Controller
         if(!$request->has('id') || ($item = Device::find($request->input('id'))) == null) return $this->showWarning('找不到设备！');
         $app = app('wechat.official_account');
         $url = $app->qrcode->url($item->ticket);
-        return response()->download($url);
+        $content = file_get_contents($url);
+        return response($content, 200, [
+            'Content-Type' => 'application/jpg',
+            'Content-Disposition' => 'attachment; filename="qrcode.jpg"',
+        ]);
     }
 }
