@@ -1,0 +1,83 @@
+@extends('admin.layout')
+
+@section('header')
+    <style type="text/css">
+        .sg-centered {
+            text-align: center;
+        }
+    </style>
+@endsection
+
+@section('content')
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                @if(isset($errors) && !$errors->isEmpty())
+                    <div class="alert alert-danger alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert"
+                                aria-hidden="true">
+                            &times;
+                        </button>
+                        @foreach($errors->keys() as $key)
+                            {{ $errors->first($key) }}
+                        @endforeach
+                    </div>
+                @endif
+
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>编辑客户</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link"> <i class="fa fa-chevron-up"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal" role="form" method="POST" action="{{ U('Client/update') }}">
+                            {{ csrf_field() }}
+
+                            <input class="form-control" type="hidden" name="id" value="{{ $item->id }}">
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">公司名称</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="company" value="{{ $item->company }}" placeholder="请输入公司名称" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">企业信用代码</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="credit_code" value="{{ $item->credit_code }}" placeholder="请输入企业信用代码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">联系人</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="name" value="{{ $item->name }}" placeholder="请输入客户名称" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">电话</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="phone" value="{{ $item->phone }}" placeholder="请输入客户电话" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <button class="btn btn-primary" type="submit">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@section('footer')
+    <script type="text/javascript">
+        $(function() {
+
+        });
+    </script>
+@endsection

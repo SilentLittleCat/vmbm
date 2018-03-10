@@ -1,0 +1,2 @@
+tissue_price                纸巾价格
+lack_tissue_low_limit       缺纸下限
