@@ -18,7 +18,7 @@ use App\Services\Base\Tree;
 use App\Services\Base\BaseArea;
 use App\Services\Admin\Menus;
 use App\Services\Admin\Acl;
-use Dingo\Api\Auth\Auth;
+use Auth;
 
 class IndexController extends Controller
 {
