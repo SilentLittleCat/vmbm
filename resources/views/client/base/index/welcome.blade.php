@@ -35,11 +35,22 @@
                 <div class="col-sm-3">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <span class="label label-warning pull-right">缺纸</span>
+                            <span class="label label-danger pull-right">缺纸</span>
                             <h5>设备</h5>
                         </div>
                         <div class="ibox-content">
                             <h1 class="no-margins">{{ $lack_device_cnt }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-danger pull-right">零纸巾</span>
+                            <h5>设备</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{ $zero_device_cnt }}</h1>
                         </div>
                     </div>
                 </div>

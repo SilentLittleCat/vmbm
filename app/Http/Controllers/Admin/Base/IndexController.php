@@ -45,7 +45,7 @@ class IndexController extends Controller
         $off_device_cnt = $devices->where('status', 0)->count();
         $online_device_cnt = $devices->where('status', 1)->count();
         $lack_device_cnt = $devices->where('status', 2)->count();
-        $zero_device_cnt = $devices->where('status', 0)->count();
+        $zero_device_cnt = $devices->where('tissue_num', 0)->count();
         $error_device_cnt = $devices->where('status', 3)->count();
         $devices_cnt = $devices->count();
         $clients_cnt = Client::all()->count();

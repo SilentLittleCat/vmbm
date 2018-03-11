@@ -18,6 +18,7 @@ use App\Services\Base\Tree;
 use App\Services\Base\BaseArea;
 use App\Services\Admin\Menus;
 use App\Services\Admin\Acl;
+use Dingo\Api\Auth\Auth;
 
 class IndexController extends Controller
 {
@@ -30,10 +31,11 @@ class IndexController extends Controller
         return view('client.base.index.index');
     }
     function welcome() {
-        $devices = Device::all();
+        $devices = Device::where('client_id', Auth::guard('client')->user()->id)->get();
         $off_device_cnt = $devices->where('status', 0)->count();
         $online_device_cnt = $devices->where('status', 1)->count();
         $lack_device_cnt = $devices->where('status', 2)->count();
+        $zero_device_cnt = $devices->where('tissue_num', 0)->count();
         $error_device_cnt = $devices->where('status', 3)->count();
         $devices_cnt = $devices->count();
         $clients_cnt = Client::all()->count();
@@ -47,7 +49,7 @@ class IndexController extends Controller
         $tissue_get_cnt = $ad_get_cnt;
         $tissues_cnt = $tissues->count();
         $tissue_buy_cnt = $tissues_cnt - $tissue_get_cnt;
-        return view('client.base.index.welcome', compact('devices_cnt', 'off_device_cnt', 'online_device_cnt', 'lack_device_cnt', 'error_device_cnt', 'clients_cnt', 'fans_cnt', 'ads_cnt', 'ad_get_cnt', 'ad_up_cnt', 'ad_down_cnt', 'tissues_cnt', 'tissue_get_cnt', 'tissue_buy_cnt'));
+        return view('client.base.index.welcome', compact('devices_cnt', 'off_device_cnt', 'online_device_cnt', 'lack_device_cnt', 'zero_device_cnt', 'error_device_cnt', 'clients_cnt', 'fans_cnt', 'ads_cnt', 'ad_get_cnt', 'ad_up_cnt', 'ad_down_cnt', 'tissues_cnt', 'tissue_get_cnt', 'tissue_buy_cnt'));
     }
     
     function createAreaDate(){
