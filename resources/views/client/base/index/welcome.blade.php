@@ -17,7 +17,7 @@
                             <h5>设备</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{ $devices_cnt }}</h1>
+                            <h1 class="no-margins">{{ $off_device_cnt . '/' . $devices_cnt }}</h1>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                             <h5>设备</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{ $off_device_cnt }}</h1>
+                            <h1 class="no-margins">{{ $off_device_cnt . '/' . $devices_cnt }}</h1>
                         </div>
                     </div>
                 </div>
@@ -39,7 +39,7 @@
                             <h5>设备</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{ $lack_device_cnt }}</h1>
+                            <h1 class="no-margins">{{ $lack_device_cnt . '/' . $devices_cnt }}</h1>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                             <h5>设备</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{ $zero_device_cnt }}</h1>
+                            <h1 class="no-margins">{{ $zero_device_cnt . '/' . $devices_cnt }}</h1>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                             <h5>设备</h5>
                         </div>
                         <div class="ibox-content">
-                            <h1 class="no-margins">{{ $error_device_cnt }}</h1>
+                            <h1 class="no-margins">{{ $error_device_cnt . '/' . $devices_cnt }}</h1>
                         </div>
                     </div>
                 </div>
