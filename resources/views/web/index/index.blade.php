@@ -27,7 +27,7 @@
 @section('footer')
     <script type="text/javascript">
         $(function() {
-            $('#buy-btn').on('click', function() {
+            $('#buy-btn').click(function() {
                 WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
                     var vConsole = new VConsole();
                     console.log(res);
