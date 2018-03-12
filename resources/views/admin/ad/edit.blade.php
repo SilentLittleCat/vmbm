@@ -94,13 +94,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">开始日期</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="date" name="begin_date" value="{{ $item->begin_date }}" placeholder="请输入开始日期" required>
+                                    <input class="form-control datepicker" type="text" name="begin_date" value="{{ $item->begin_date }}" placeholder="请输入开始日期" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">截止日期</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="date" name="end_date" value="{{ $item->end_date }}" placeholder="请输入截止日期" required>
+                                    <input class="form-control datepicker" type="text" name="end_date" value="{{ $item->end_date }}" placeholder="请输入截止日期" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -130,7 +130,10 @@
 @section('footer')
     <script type="text/javascript">
         $(function() {
-
+            $('.datepicker').datepicker({
+                language: 'zh-CN',
+                format: "yyyy-mm-dd",
+            });
         });
     </script>
 @endsection
