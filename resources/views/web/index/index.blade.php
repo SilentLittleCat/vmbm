@@ -29,7 +29,7 @@
         $(function() {
             $('#buy-btn').on('click', '.btn-danger', function() {
                 var vConsole = new VConsole();
-                console.log(res);
+                console.log('ok');
                 WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
                     var vConsole = new VConsole();
                     console.log(res);
