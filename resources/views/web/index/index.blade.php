@@ -35,13 +35,6 @@
                         window.location = '/web/Index/payResult?status=fail';
                     }
                 });
-                WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
-                    if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-                        window.location = '/web/Index/payResult?status=success';
-                    } else {
-                        window.location = '/web/Index/payResult?status=fail';
-                    }
-                });
             });
         });
     </script>
