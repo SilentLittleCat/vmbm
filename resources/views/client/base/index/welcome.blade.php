@@ -66,111 +66,52 @@
                     </div>
                 </div>
             </div>
-            {{--<div class="row">--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-success pull-right">总数</span>--}}
-                            {{--<h5>客户</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $clients_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-success pull-right">总数</span>--}}
-                            {{--<h5>粉丝</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $fans_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-success pull-right">总数</span>--}}
-                            {{--<h5>广告</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $ads_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-info pull-right">总关注次数</span>--}}
-                            {{--<h5>广告</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $ad_get_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-primary pull-right">上架</span>--}}
-                            {{--<h5>广告</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $ad_up_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-danger pull-right">下架</span>--}}
-                            {{--<h5>广告</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $ad_down_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
-            {{--<div class="row">--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-success pull-right">总数</span>--}}
-                            {{--<h5>纸巾</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $tissues_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-info pull-right">领取</span>--}}
-                            {{--<h5>纸巾</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $tissue_get_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-                {{--<div class="col-sm-3">--}}
-                    {{--<div class="ibox float-e-margins">--}}
-                        {{--<div class="ibox-title">--}}
-                            {{--<span class="label label-primary pull-right">购买</span>--}}
-                            {{--<h5>纸巾</h5>--}}
-                        {{--</div>--}}
-                        {{--<div class="ibox-content">--}}
-                            {{--<h1 class="no-margins">{{ $tissue_buy_cnt }}</h1>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
-            {{--</div>--}}
+            <div class="row">
+                <form class="">
+                    <div class="col-sm-2">
+                        <select class="form-control" name="date">
+                            <option value="today" {{ Request::get('date') == 'today' ? 'selected' : '' }}>当天</option>
+                            <option value="three_day" {{ Request::get('date') == 'three_day' ? 'selected' : '' }}>最近三天</option>
+                            <option value="seven_day" {{ Request::get('date') == 'seven_day' ? 'selected' : '' }}>最近七天</option>
+                            <option value="this_month" {{ Request::get('date') == 'this_month' ? 'selected' : '' }}>本月</option>
+                            <option value="last_month" {{ Request::get('date') == 'last_month' ? 'selected' : '' }}>上月</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control datepicker" value="{{ Request::get('begin_date') }}" placeholder="开始日期" name="begin_date"class="input-sm form-control">
+                    </div>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control datepicker" value="{{ Request::get('end_date') }}" placeholder="结束日期" name="end_date"class="input-sm form-control">
+                    </div>
+                    <div class="col-sm-2">
+                        <button type="submit" class="btn btn-primary">搜索</button>
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-danger pull-right">购买</span>
+                            <h5>纸巾</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{ $buy_cnt }}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <span class="label label-info pull-right">领取</span>
+                            <h5>纸巾</h5>
+                        </div>
+                        <div class="ibox-content">
+                            <h1 class="no-margins">{{ $get_cnt }}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -178,7 +119,10 @@
 @section('footer')
     <script type="text/javascript">
         $(function() {
-
+            $('.datepicker').datepicker({
+                language: 'zh-CN',
+                format: "yyyy-mm-dd",
+            });
         });
     </script>
 @endsection

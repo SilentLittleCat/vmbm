@@ -18,6 +18,8 @@ use App\Services\Base\Tree;
 use App\Services\Base\BaseArea;
 use App\Services\Admin\Menus;
 use App\Services\Admin\Acl;
+use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Auth;
 
 class IndexController extends Controller
@@ -30,7 +32,7 @@ class IndexController extends Controller
     function index() {
         return view('client.base.index.index');
     }
-    function welcome() {
+    function welcome(Request $request) {
         $devices = Device::where('client_id', Auth::guard('client')->user()->id)->get();
         $off_device_cnt = $devices->where('status', 0)->count();
         $online_device_cnt = $devices->where('status', 1)->count();
@@ -38,18 +40,57 @@ class IndexController extends Controller
         $zero_device_cnt = $devices->where('tissue_num', 0)->count();
         $error_device_cnt = $devices->where('status', 3)->count();
         $devices_cnt = $devices->count();
-        $clients_cnt = Client::all()->count();
-        $fans_cnt = Fan::all()->count();
-        $ads = AD::all();
-        $ad_get_cnt = Tissue::where('status', 0)->get()->count();
-        $ad_up_cnt = $ads->where('status', 1)->count();
-        $ad_down_cnt = $ads->where('status', 0)->count();
-        $ads_cnt = $ads->count();
-        $tissues = Tissue::all();
-        $tissue_get_cnt = $ad_get_cnt;
-        $tissues_cnt = $tissues->count();
-        $tissue_buy_cnt = $tissues_cnt - $tissue_get_cnt;
-        return view('client.base.index.welcome', compact('devices_cnt', 'off_device_cnt', 'online_device_cnt', 'lack_device_cnt', 'zero_device_cnt', 'error_device_cnt', 'clients_cnt', 'fans_cnt', 'ads_cnt', 'ad_get_cnt', 'ad_up_cnt', 'ad_down_cnt', 'tissues_cnt', 'tissue_get_cnt', 'tissue_buy_cnt'));
+        $ids = $devices->pluck('id');
+
+        if(($request->has('begin_date') && $request->input('begin_date')) || ($request->has('end_date') && $request->input('end_date'))) {
+            if(!$request->has('begin_date') || $request->input('begin_date') == null) {
+                $begin_date = Carbon::createFromDate(2000, 1, 1)->toDateTimeString();
+            } else {
+                $begin_date = $request->input('begin_date');
+                $begin_date = explode('-', $begin_date);
+                $begin_date = Carbon::createFromDate($begin_date[0], $begin_date[1], $begin_date[2])->toDateTimeString();
+            }
+            if(!$request->has('end_date') || $request->input('end_date') == null) {
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            } else {
+                $end_date = $request->input('end_date');
+                $end_date = explode('-', $end_date);
+                $end_date = Carbon::createFromDate($end_date[0], $end_date[1], $end_date[2])->toDateTimeString();
+            }
+        } else if($request->has('date') && $request->input('date')) {
+            if($request->input('date') == 'three_day') {
+                $begin_date = Carbon::now()->subDays(2)->toDateTimeString();
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            } else if($request->input('date') == 'seven_day') {
+                $begin_date = Carbon::now()->subDays(6)->toDateTimeString();
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            } else if($request->input('date') == 'this_month') {
+                $now = Carbon::now();
+                $begin_date = Carbon::createFromDate($now->year, $now->month, 1)->toDateTimeString();
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            } else if($request->input('date') == 'last_month') {
+                $last_month = Carbon::now()->subMonth();
+                $begin_date = Carbon::createFromDate($last_month->year, $last_month->month, 1)->toDateTimeString();
+                $now = Carbon::now();
+                $begin_date = Carbon::createFromDate($now->year, $now->month, 1)->toDateTimeString();
+            } else {
+                $begin_date = Carbon::today()->toDateTimeString();
+                $end_date = Carbon::tomorrow()->toDateTimeString();
+            }
+        } else {
+            $begin_date = Carbon::today()->toDateTimeString();
+            $end_date = Carbon::tomorrow()->toDateTimeString();
+        }
+        $tissues = Tissue::where([
+            ['created_at', '>=', $begin_date],
+            ['created_at', '<=', $end_date]
+        ])->get()->filter(function ($value) use($ids) {
+            if($ids->contains($value->id)) return true;
+            return false;
+        });
+        $get_cnt = $tissues->where('status', 0)->count();
+        $buy_cnt = $tissues->where('status', 1)->count();
+        return view('client.base.index.welcome', compact('devices_cnt', 'off_device_cnt', 'online_device_cnt', 'lack_device_cnt', 'zero_device_cnt', 'error_device_cnt', 'get_cnt', 'buy_cnt'));
     }
     
     function createAreaDate(){
