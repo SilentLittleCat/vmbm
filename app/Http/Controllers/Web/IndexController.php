@@ -9,6 +9,7 @@ use App\Models\Fan;
 use App\Models\Record;
 use App\Models\Setting;
 use App\Models\TissueRecord;
+use App\Models\Tissue;
 use App\Models\WechatOrder;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
