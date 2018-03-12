@@ -31,7 +31,7 @@
         </div>
         <div class="row" style="margin-top: 20px;">
             <div class="logo col-sm-6 col-sm-offset-3" id="buy-btn">
-                <div class="btn btn-lg btn-danger btn-block" onclick="buyTissue();">购买</div>
+                <a class="btn btn-lg btn-danger btn-block" onclick="buyTissue();">购买</a>
             </div>
         </div>
     </div>
