@@ -85,7 +85,7 @@ class IndexController extends Controller
             ['created_at', '>=', $begin_date],
             ['created_at', '<=', $end_date]
         ])->get()->filter(function ($value) use($ids) {
-            if($ids->contains($value->id)) return true;
+            if($ids->contains($value->device_id)) return true;
             return false;
         });
         $get_cnt = $tissues->where('status', 0)->count();
