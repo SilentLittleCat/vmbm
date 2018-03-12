@@ -109,6 +109,14 @@ class DeviceController extends Controller
 //        return $this->showMessage('删除成功！', '/admin/Device/index');
 //    }
 
+    public function qrcode(Request $request)
+    {
+        if(!$request->has('id') || ($item = Device::find($request->input('id'))) == null) return $this->showWarning('找不到设备！');
+        $app = app('wechat.official_account');
+        $url = $app->qrcode->url($item->ticket);
+        return redirect($url);
+    }
+
     public function download(Request $request)
     {
         if(!$request->has('id') || ($item = Device::find($request->input('id'))) == null) return $this->showWarning('找不到设备！');

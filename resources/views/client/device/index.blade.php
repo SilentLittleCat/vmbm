@@ -79,7 +79,9 @@
                                         <td>{{ $item->type }}</td>
                                         <td>{{ $item->location }}</td>
                                         <td>{{ $item->IMEI }}</td>
-                                        <td>{{ $item->code }}</td>
+                                        <td>
+                                            <a class="btn btn-sm btn-info" target="_blank" href="{{ '/client/Device/qrcode?id=' . $item->id  }}">获取</a>
+                                        </td>
                                         <td>
                                             @if($item->auth_status == 0)
                                                 <span class="label label-default">未审核</span>
