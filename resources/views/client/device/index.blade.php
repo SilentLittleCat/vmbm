@@ -60,6 +60,7 @@
                                 <th>二维码</th>
                                 <th>审核状态</th>
                                 <th>状态</th>
+                                <th>告警信息</th>
                                 <th>纸巾数</th>
                                 <th>客户名</th>
                                 <th>客户手机</th>
@@ -69,7 +70,7 @@
                             <tbody>
                             @if(count($list) == 0)
                                 <tr>
-                                    <td colspan="11" class="sg-centered">暂无设备！</td>
+                                    <td colspan="12" class="sg-centered">暂无设备！</td>
                                 </tr>
                             @else
                                 @foreach($list as $item)
@@ -87,6 +88,9 @@
                                             @else
                                                 <span class="label label-danger">审核不过</span>
                                             @endif
+                                        </td>
+                                        <td>
+                                            {{ $item->getWarnInfo($item->id) }}
                                         </td>
                                         <td>
                                             @if($item->status == 0)

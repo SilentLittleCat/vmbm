@@ -17,10 +17,7 @@
     <div class="middle-box text-center loginscreen  animated fadeInDown">
         <div>
             <div>
-                <div>
-                    <h3 class="logo-name">ZMZ</h3>
-                </div>
-                <h3>纸妹子后台管理</h3>
+                <h3>自助共享设备后台管理</h3>
             </div>
             <form class="m-t" role="form" accept-charset="UTF-8" method="post">
                 {{ csrf_field() }}

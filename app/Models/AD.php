@@ -19,4 +19,9 @@ class AD extends Model
     {
         return $this->belongsToMany('App\Models\Client', 'a_d_clients', 'ad_id', 'client_id');
     }
+
+    public function fans()
+    {
+        return $this->belongsToMany('App\Models\Fan', 'ad_fan', 'ad_id', 'fan_id');
+    }
 }

@@ -9,6 +9,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Validator;
+use Auth;
 
 class DeviceController extends Controller
 {
@@ -16,14 +17,14 @@ class DeviceController extends Controller
     {
         if($request->has('keyword') && $request->input('keyword')) {
             $keyword = $request->input('keyword');
-            $list = Device::with(['client'])->orderBy('updated_at', 'desc')->get()->filter(function ($value) use($keyword) {
+            $list = Device::where('client_id', Auth::guard('client')->user()->id)->with(['client'])->orderBy('updated_at', 'desc')->get()->filter(function ($value) use($keyword) {
                 if(!(strpos($value->name, $keyword) === false)) return true;
                 if($value->client && !(strpos($value->client->name, $keyword) === false)) return true;
                 return false;
             });
             $list = $this->paginate($list);
         } else {
-            $list = Device::with(['client'])->orderBy('updated_at', 'desc')->paginate();
+            $list = Device::where('client_id', Auth::guard('client')->user()->id)->with(['client'])->orderBy('updated_at', 'desc')->paginate();
         }
         return view('client.device.index', compact('list'));
     }
@@ -44,6 +45,7 @@ class DeviceController extends Controller
     public function detail(Request $request)
     {
         if(!$request->has('id') || ($item = Device::find($request->input('id'))) == null) return back();
+        if(Auth::guard('client')->user()->id != $item->client_id) return back();
         return view('client.device.detail', compact('item'));
     }
 

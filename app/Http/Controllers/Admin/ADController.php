@@ -159,6 +159,22 @@ class ADController extends Controller
         return $this->showMessage('添加成功！', url()->previous());
     }
 
+    public function addClients(Request $request)
+    {
+        if($request->method() != 'POST') return back();
+        if(!$request->has('ad_id') || ($ad = AD::find($request->input('ad_id'))) == null) return $this->showWarning('找不到广告！');
+        if(!$request->has('client_ids') || !is_array($request->input('client_ids'))) return $this->showWarning('没有选择客户！');
+        $client_ids = $request->input('client_ids');
+        foreach($client_ids as $client_id) {
+            $res = ADClient::create([
+                'ad_id' => $ad->id,
+                'client_id' => $client_id
+            ]);
+            if(!$res) return $this->showWarning('上架失败！');
+        }
+        return $this->showMessage('上架成功！', url()->previous());
+    }
+
     public function deleteClient(Request $request)
     {
         if($request->method() != 'POST') return back();
@@ -168,7 +184,48 @@ class ADController extends Controller
             'ad_id' => $request->input('ad_id'),
             'client_id' => $request->input('client_id')
         ])->delete();
-        if(!$res) return $this->showWarning('删除失败！');
+        if(!$res) return $this->showWarnings('删除失败！');
         return $this->showMessage('删除成功！', url()->previous());
+    }
+
+    public function deleteClients(Request $request)
+    {
+        if($request->method() != 'POST') return back();
+        if(!$request->has('ad_id') || ($ad = AD::find($request->input('ad_id'))) == null) return $this->showWarning('找不到广告！');
+        if(!$request->has('client_ids') || !is_array($request->input('client_ids'))) return $this->showWarning('没有选择客户！');
+        $client_ids = $request->input('client_ids');
+        foreach($client_ids as $client_id) {
+            $res = ADClient::where([
+                'ad_id' => $ad->id,
+                'client_id' => $client_id
+            ])->delete();
+            if(!$res) return $this->showWarning('下架失败！');
+        }
+        return $this->showMessage('下架成功！', url()->previous());
+    }
+
+    public function getUpClients(Request $request)
+    {
+        if(!$request->has('id') || ($ad = AD::find($request->input('id'))) == null) return response()->json(['status' => 'fail']);
+        $list = $ad->clients;
+        if(is_null($list)) {
+            $clients = Client::select(['id', 'name'])->all();
+        } else {
+            $ids = $list->pluck('id');
+            $clients = Client::whereNotIn('id', $ids)->select(['id', 'name'])->get();
+        }
+        $clients = $clients->toArray();
+        return response()->json(['status' => 'success', 'clients' => $clients]);
+    }
+
+    public function getDownClients(Request $request)
+    {
+        if(!$request->has('id') || ($ad = AD::find($request->input('id'))) == null) return response()->json(['status' => 'fail']);
+        $list = $ad->clients;
+        if(is_null($list)) {
+            $clients = collect([]);
+        }
+        $clients = $list->toArray();
+        return response()->json(['status' => 'success', 'clients' => $clients]);
     }
 }

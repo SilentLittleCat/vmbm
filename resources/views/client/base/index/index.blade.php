@@ -38,7 +38,7 @@
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             {{--<li><a target="_blank" href="/">网站首页</a></li>--}}
-                            {{--<li><a href="/admin/changePassword" class="J_menuItem">修改密码</a></li>--}}
+                            <li><a href="/client/changePassword" class="J_menuItem">修改密码</a></li>
                             {{--<li class="divider"></li>--}}
                             <li><a href="/client/logout">安全退出</a>
                             </li>
@@ -72,8 +72,11 @@
     <!--右侧部分开始-->
     <div id="page-wrapper" class="gray-bg dashbard-1">
         <div class="row J_mainContent" id="content-main" style="height:calc(100% - 80px)">
-            <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="client/Base/Index/welcome" frameborder="0" data-id="index_v1.html" seamless>
-            </iframe>
+            @if(Auth::guard('client')->check() && Auth::guard('client')->user()->login_flag == 1)
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="client/changePassword" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            @else
+                <iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="client/Base/Index/welcome" frameborder="0" data-id="index_v1.html" seamless></iframe>
+            @endif
         </div>
         <div class="footer" style="position: fixed;bottom:0;right: 0;left: 0">
             <div class="pull-right">&copy; 2014-2019 <a href="/" target="_blank">纸妹子</a>

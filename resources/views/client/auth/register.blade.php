@@ -25,7 +25,7 @@
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
                 <div class="panel-heading" style="text-align: center">
-                    <h3><b>纸妹子</b>设备客户注册</h3>
+                    <h3>自助共享设备客户注册</h3>
                 </div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('client/register') }}">

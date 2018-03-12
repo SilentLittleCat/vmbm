@@ -12,14 +12,20 @@ class SettingController extends Controller
     {
         $tissue_price = Setting::where('key', 'tissue_price')->first();
         $lack_tissue_low_limit = Setting::where('key', 'lack_tissue_low_limit')->first();
-        return view('admin.setting.index', compact('tissue_price', 'lack_tissue_low_limit'));
+        $lack_info = Setting::where('key', 'lack_info')->first();
+        $zero_info = Setting::where('key', 'zero_info')->first();
+        $error_info = Setting::where('key', 'error_info')->first();
+        return view('admin.setting.index', compact('tissue_price', 'lack_tissue_low_limit', 'lack_info', 'zero_info', 'error_info'));
     }
 
     public function edit(Request $request)
     {
         $tissue_price = Setting::where('key', 'tissue_price')->first();
         $lack_tissue_low_limit = Setting::where('key', 'lack_tissue_low_limit')->first();
-        return view('admin.setting.edit', compact('tissue_price', 'lack_tissue_low_limit'));
+        $lack_info = Setting::where('key', 'lack_info')->first();
+        $zero_info = Setting::where('key', 'zero_info')->first();
+        $error_info = Setting::where('key', 'error_info')->first();
+        return view('admin.setting.edit', compact('tissue_price', 'lack_tissue_low_limit', 'lack_info', 'zero_info', 'error_info'));
     }
 
     public function update(Request $request)

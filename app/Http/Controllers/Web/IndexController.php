@@ -138,7 +138,7 @@ class IndexController extends Controller
         };
 
         $ad = $ads->filter(function ($item) use($user) {
-            if($item->status == 0) return false;
+//            if($item->status == 0) return false;
             if($item->num > $item->limit) return false;
             if($item->day_num > $item->day_limit) return false;
             $now = Carbon::now()->toDateString();
@@ -170,6 +170,17 @@ class IndexController extends Controller
             return view('web.error', compact('type', 'info'));
         };
         return view('web.index.get', compact('ad', 'user'));
+    }
+
+    public function getAuth(Request $request)
+    {
+        $user = session('wechat.oauth_user');
+        $openId = $user['default']['id'];
+//        $id = Record::orderBy('id', 'desc')->first()->fan_id;
+        $user = Fan::where('wechat_id', $openId)->first();
+        dd($user);
+        if(!$request->has('back_code') || ($ad = AD::where('back_code', $request->input('back_code'))->first()) == null) return view('web.error', ['type' => 'error', 'info' => '未关注公众号！']);
+
     }
 
     public function buy(Request $request)

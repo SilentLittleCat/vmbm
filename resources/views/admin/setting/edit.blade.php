@@ -45,7 +45,25 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">缺纸下限</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="lack_tissue_low_limit" value="{{ $lack_tissue_low_limit ? $lack_tissue_low_limit->value : '' }}" placeholder="请输入缺纸下限" required>
+                                    <input class="form-control" type="number" name="lack_tissue_low_limit" value="{{ $lack_tissue_low_limit ? $lack_tissue_low_limit->value : '' }}" placeholder="请输入缺纸下限(整数)" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">缺纸告警信息</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="lack_info" value="{{ $lack_info ? $lack_info->value : '' }}" placeholder="请输入缺纸告警信息" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">零纸巾告警信息</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="zero_info" value="{{ $zero_info ? $zero_info->value : '' }}" placeholder="请输入零纸巾告警信息" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">故障告警信息</label>
+                                <div class="col-sm-6">
+                                    <input class="form-control" type="text" name="error_info" value="{{ $error_info ? $error_info->value : '' }}" placeholder="请输入故障告警信息" required>
                                 </div>
                             </div>
                             <div class="form-group">

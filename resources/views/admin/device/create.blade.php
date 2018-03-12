@@ -104,7 +104,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">纸巾数</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="number" name="tissue_num" value="{{ Request::get('tissue_num') }}" placeholder="请输入设备纸巾数" required>
+                                    <input class="form-control" type="text" name="tissue_num" value="{{ Request::get('tissue_num') }}" placeholder="请输入设备纸巾数" required>
                                 </div>
                             </div>
                             <div class="form-group">

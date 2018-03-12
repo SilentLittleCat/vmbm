@@ -53,6 +53,8 @@ Route::get('/device', 'TestController@device');
 Route::any('/wechat', 'WeChatController@serve');
 Route::any('/wechat/pay-notify', 'WeChatController@payNotify');
 
+//Route::get('web/Index/getAuth', '/Web/IndexController@getAuth');
+
 //Route::get('/web/index', 'Web\IndexController@index');
 Route::namespace('Web')->prefix('web')->middleware(['wechat.oauth'])->group(function () {
 //Route::namespace('Web')->prefix('web')->group(function () {
@@ -60,6 +62,7 @@ Route::namespace('Web')->prefix('web')->middleware(['wechat.oauth'])->group(func
     Route::get('Index/get', 'IndexController@get');
 //    Route::get('Index/buy', 'IndexController@buy');
     Route::get('Index/payResult', 'IndexController@payResult');
+    Route::get('Index/getAuth', 'IndexController@getAuth');
 //    Route::get('/user', function () {
 //        $app = app('wechat.official_account');
 //        $user = session('wechat.oauth_user');

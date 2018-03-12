@@ -62,7 +62,8 @@ class IndexController extends Controller
         $tissue_get_cnt = $ad_get_cnt;
         $tissues_cnt = $tissues->count();
         $tissue_buy_cnt = $tissues_cnt - $tissue_get_cnt;
-        return view('admin.base.index.welcome', compact('devices_cnt', 'off_device_cnt', 'online_device_cnt', 'lack_device_cnt', 'zero_device_cnt', 'error_device_cnt', 'clients_cnt', 'fans_cnt', 'ads_cnt', 'ad_get_cnt', 'ad_up_cnt', 'ad_down_cnt', 'tissues_cnt', 'tissue_get_cnt', 'tissue_buy_cnt'));
+        $need_auth = Device::where('auth_status', 0)->get()->count();
+        return view('admin.base.index.welcome', compact('devices_cnt', 'off_device_cnt', 'online_device_cnt', 'lack_device_cnt', 'zero_device_cnt', 'error_device_cnt', 'clients_cnt', 'fans_cnt', 'ads_cnt', 'ad_get_cnt', 'ad_up_cnt', 'ad_down_cnt', 'tissues_cnt', 'tissue_get_cnt', 'tissue_buy_cnt', 'need_auth'));
     }
     
     function createAreaDate(){

@@ -189,7 +189,9 @@
 @section('footer')
     <script type="text/javascript">
         $(function() {
-
+            @if($need_auth != 0)
+                alert('有设备等待审核！');
+            @endif
         });
     </script>
 @endsection

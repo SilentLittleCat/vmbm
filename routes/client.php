@@ -18,8 +18,8 @@ Route::get('register','Auth\RegisterController@showRegistrationForm');
 Route::post('register','Auth\RegisterController@register');
 Route::get('logout', 'Auth\LoginController@logout');
 //Route::get('noauth', 'Auth\LoginController@noauth');
-//Route::get('changePassword', 'Auth\ResetPasswordController@showChangeForm')->name('password.reset');
-//Route::post('changePassword', 'Auth\ResetPasswordController@changePassword');
+Route::get('changePassword', 'Auth\ResetPasswordController@showChangeForm')->middleware(['auth.client']);
+Route::post('changePassword', 'Auth\ResetPasswordController@changePassword')->middleware(['auth.client']);
 
 
 Route::group(['middleware' => ['auth.client']], function() {

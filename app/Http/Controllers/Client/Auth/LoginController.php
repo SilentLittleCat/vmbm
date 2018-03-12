@@ -53,4 +53,14 @@ class LoginController extends Controller
     {
         return 'phone';
     }
+
+    protected function authenticated(Request $request, $user)
+    {
+        if($user->login_flag != 1 && $user->login_flag != 2) {
+            $user->login_flag = 1;
+        } else if($user->login_flag == 1) {
+            $user->login_flag = 2;
+        }
+        $user->save();
+    }
 }
