@@ -53,7 +53,7 @@
                         </div>
                         <div class="row sg-item">
                             <div class="col-sm-2 col-sm-offset-2 sg-label">领取链接</div>
-                            <div class="col-sm-6 sg-value" style="font-size: 0.6em"><xmp><a href="{{ 'zuoxianyouguo.com/web/Index/getAuth?back_code=' . $item->back_code }}"target="_blank">领取纸巾</a></xmp></div>
+                            <div class="col-sm-6 sg-value" style="font-size: 0.6em"><xmp><a href="{{ 'http://zuoxianyouguo.com/web/Index/getAuth?back_code=' . $item->back_code }}"target="_blank">领取纸巾</a></xmp></div>
                         </div>
                         <div class="row sg-item">
                             <div class="col-sm-2 col-sm-offset-2 sg-label">商家名称</div>
