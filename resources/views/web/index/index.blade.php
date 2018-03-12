@@ -24,14 +24,14 @@
                 <img src="/base/img/meizi.jpeg">
             </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-bottom: 20px">
             <div class="logo col-sm-6 col-sm-offset-3">
                 <a href="/web/Index/get" class="btn btn-lg btn-success btn-block">领取</a>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;" onclick="buyTissue();">
+        <div class="row">
             <div class="logo col-sm-6 col-sm-offset-3" id="buy-btn">
-                <a class="btn btn-lg btn-danger btn-block">购买</a>
+                <a class="btn btn-lg btn-danger btn-block" onclick="buyTissue();">购买</a>
             </div>
         </div>
     </div>
