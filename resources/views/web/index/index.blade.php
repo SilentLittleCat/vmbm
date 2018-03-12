@@ -29,8 +29,8 @@
                 <a href="/web/Index/get" class="btn btn-lg btn-success btn-block">领取</a>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;">
-            <div class="logo col-sm-6 col-sm-offset-3" id="buy-btn" onclick="buyTissue();">
+        <div class="row" style="margin-top: 20px;" onclick="buyTissue();">
+            <div class="logo col-sm-6 col-sm-offset-3" id="buy-btn">
                 <a class="btn btn-lg btn-danger btn-block">购买</a>
             </div>
         </div>
