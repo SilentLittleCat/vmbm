@@ -27,6 +27,15 @@
 @section('footer')
     <script type="text/javascript">
         $(function() {
+            WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
+                var vConsole = new VConsole();
+                console.log(res);
+                if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                    window.location = '/web/Index/payResult?status=success';
+                } else {
+                    window.location = '/web/Index/payResult?status=fail';
+                }
+            });
             $('#buy-btn').on('click', function() {
                 WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
                     var vConsole = new VConsole();
