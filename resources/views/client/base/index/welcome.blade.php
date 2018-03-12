@@ -66,7 +66,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="margin-bottom: 30px;">
                 <form class="">
                     <div class="col-sm-2">
                         <select class="form-control" name="date">
