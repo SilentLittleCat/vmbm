@@ -16,9 +16,9 @@
                 <a href="/web/Index/get" class="btn btn-lg btn-success btn-block">领取</a>
             </div>
         </div>
-        <div class="row" style="margin-top: 20px;" id="buy-btn">
+        <div class="row" style="margin-top: 20px;">
             <div class="logo col-sm-6 col-sm-offset-3">
-                <div class="btn btn-lg btn-danger btn-block">购买</div>
+                <div class="btn btn-lg btn-danger btn-block" id="buy-btn">购买</div>
             </div>
         </div>
     </div>
@@ -29,8 +29,6 @@
         $(function() {
             $('#buy-btn').on('click', function() {
                 WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
-                    var vConsole = new VConsole();
-                    console.log(res);
                     if(res.err_msg == "get_brand_wcpay_request:ok" ) {
                         window.location = '/web/Index/payResult?status=success';
                     } else {
