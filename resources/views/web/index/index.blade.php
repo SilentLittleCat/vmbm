@@ -28,6 +28,8 @@
     <script type="text/javascript">
         $(function() {
             $('#buy-btn').on('click', '.btn-danger', function() {
+                var vConsole = new VConsole();
+                console.log(res);
                 WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
                     var vConsole = new VConsole();
                     console.log(res);
