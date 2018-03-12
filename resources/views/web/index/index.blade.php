@@ -2,19 +2,6 @@
 
 @section('header')
     <script src="/js/vconsole.min.js" ></script>
-    <script type="text/javascript">
-        function buyTissue() {
-            WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
-                var vConsole = new VConsole();
-                console.log(res);
-                if(res.err_msg == "get_brand_wcpay_request:ok" ) {
-                    window.location = '/web/Index/payResult?status=success';
-                } else {
-                    window.location = '/web/Index/payResult?status=fail';
-                }
-            });
-        }
-    </script>
 @endsection
 
 @section('content')
@@ -31,7 +18,7 @@
         </div>
         <div class="row">
             <div class="logo col-sm-6 col-sm-offset-3" id="buy-btn">
-                <a class="btn btn-lg btn-danger btn-block" onclick="buyTissue();">购买</a>
+                <a class="btn btn-lg btn-danger btn-block">购买</a>
             </div>
         </div>
     </div>
@@ -40,17 +27,17 @@
 @section('footer')
     <script type="text/javascript">
         $(function() {
-            {{--function buyTissue() {--}}
-                {{--WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {--}}
-                    {{--var vConsole = new VConsole();--}}
-                    {{--console.log(res);--}}
-                    {{--if(res.err_msg == "get_brand_wcpay_request:ok" ) {--}}
-                        {{--window.location = '/web/Index/payResult?status=success';--}}
-                    {{--} else {--}}
-                        {{--window.location = '/web/Index/payResult?status=fail';--}}
-                    {{--}--}}
-                {{--});--}}
-            {{--}--}}
+            $('#buy-btn').on('click', '.btn-danger', function() {
+                WeixinJSBridge.invoke('getBrandWCPayRequest', {!! $json !!}, function(res) {
+                    var vConsole = new VConsole();
+                    console.log(res);
+                    if(res.err_msg == "get_brand_wcpay_request:ok" ) {
+                        window.location = '/web/Index/payResult?status=success';
+                    } else {
+                        window.location = '/web/Index/payResult?status=fail';
+                    }
+                });
+            });
         });
     </script>
 @endsection
