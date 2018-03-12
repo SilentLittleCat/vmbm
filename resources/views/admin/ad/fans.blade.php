@@ -26,7 +26,7 @@
 
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>客户列表</h5>
+                        <h5>广告ID为<b>{{ $ad->id }}</b>的粉丝列表</h5>
                         <div class="ibox-tools">
                             <a class="collapse-link"> <i class="fa fa-chevron-up"></i>
                             </a>
@@ -34,57 +34,60 @@
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                            <form method="GET" action="" accept-charset="UTF-8">
+                            {{--<form method="GET" action="" accept-charset="UTF-8">--}}
 
-                                <div class="col-sm-4">
-                                    <div class="input-group">
-                                        <input type="text" value="{{ Request::get('keyword') }}" placeholder="请输入关键词" name="keyword"class="input-sm form-control">
-                                        <span class="input-group-btn">
-									<button type="submit" class="btn btn-sm btn-primary">搜索</button>
-								</span>
-                                    </div>
-                                </div>
-                            </form>
+                                {{--<div class="col-sm-4">--}}
+                                    {{--<div class="input-group">--}}
+                                        {{--<input type="text" value="{{ Request::get('keyword') }}" placeholder="请输入微信ID/号进行搜索" name="keyword"class="input-sm form-control">--}}
+                                        {{--<span class="input-group-btn">--}}
+									{{--<button type="submit" class="btn btn-sm btn-primary">搜索</button>--}}
+								{{--</span>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</form>--}}
                             <div class="col-sm-3 pull-right">
-                                <a href="{{ U('Client/create')}}" class="btn btn-sm btn-primary pull-right">添加</a>
+                                <a href="{{ U('AD/index')}}" class="btn btn-sm btn-primary pull-right">返回广告列表</a>
                             </div>
                         </div>
                         {{--表格开始--}}
                         <table class="table table-striped table-bordered table-hover dataTable" id="sg-table">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>公司名称</th>
-                                <th>企业信用代码</th>
-                                <th>联系人</th>
-                                <th>电话</th>
-                                <th>设备数</th>
-                                <th>粉丝数</th>
-                                <th>创建时间</th>
+                                <th>微信名</th>
+                                <th>状态</th>
+                                <th>消费金额</th>
+                                <th>获得纸巾数</th>
+                                <th>购买纸巾数</th>
+                                <th>领取纸巾数</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             @if(count($list) == 0)
                                 <tr>
-                                    <td colspan="9" class="sg-centered">暂无客户！</td>
+                                    <td colspan="7" class="sg-centered">暂无粉丝！</td>
                                 </tr>
                             @else
                                 @foreach($list as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->company }}</td>
-                                        <td>{{ $item->credit_code }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->phone }}</td>
-                                        <td>{{ $item->devices_count }}</td>
-                                        <td>{{ $item->created_at }}</td>
+                                        <td>{{ $item->wechat_name }}</td>
+                                        <td>
+                                            @if($item->status == 0)
+                                                <span class="label label-danger">未关注</span>
+                                            @else
+                                                <span class="label label-success">关注</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ $item->money }}</td>
+                                        <td>{{ $item->num }}</td>
+                                        <td>{{ $item->buy_num }}</td>
+                                        <td>{{ $item->num - $item->buy_num }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <div class="btn btn-sm btn-info btn-device" data-id="{{ $item->id }}">设备</div>
-                                                <div class="btn btn-sm btn-primary btn-edit" data-id="{{ $item->id }}">编辑</div>
-                                                <div class="btn btn-sm btn-success btn-password" data-id="{{ $item->id }}">密码</div>
-                                                <div class="btn btn-sm btn-danger btn-delete" data-id="{{ $item->id }}">删除</div>
+                                                {{--<div class="btn btn-sm btn-default btn-tissue" data-id="{{ $item->id }}">纸巾</div>--}}
+                                                <div class="btn btn-sm btn-info btn-detail" data-id="{{ $item->id }}">详情</div>
+                                                {{--<div class="btn btn-sm btn-primary btn-edit" data-id="{{ $item->id }}">编辑</div>--}}
+                                                {{--<div class="btn btn-sm btn-danger btn-delete" data-id="{{ $item->id }}">删除</div>--}}
                                             </div>
                                         </td>
                                     </tr>
@@ -138,18 +141,18 @@
     <script type="text/javascript">
         $(function() {
             $('#sg-table').on('click', '.btn-delete', function () {
-                var url = "{{ U('Client/destroy') }}" + '?id=' + $(this).attr('data-id');
+                var url = "{{ U('Fan/destroy') }}" + '?id=' + $(this).attr('data-id');
                 $('#sg-form').attr('action', url);
                 $('#my-modal-label').text('确认删除？');
                 $('#my-modal').modal('show');
-            }).on('click', '.btn-device', function () {
-                var url = "{{ U('Client/device') }}" + '?id=' + $(this).attr('data-id');
+            }).on('click', '.btn-detail', function () {
+                var url = "{{ U('Fan/detail') }}" + '?id=' + $(this).attr('data-id');
                 window.location = url;
             }).on('click', '.btn-edit', function () {
-                var url = "{{ U('Client/edit') }}" + '?id=' + $(this).attr('data-id');
+                var url = "{{ U('Fan/edit') }}" + '?id=' + $(this).attr('data-id');
                 window.location = url;
-            }).on('click', '.btn-password', function () {
-                var url = "{{ U('Client/password') }}" + '?id=' + $(this).attr('data-id');
+            }).on('click', '.btn-tissue', function () {
+                var url = "{{ U('Tissue/index') }}" + '?fan_id=' + $(this).attr('data-id');
                 window.location = url;
             });
 

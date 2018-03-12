@@ -35,8 +35,16 @@
                     <div class="ibox-content">
                         <div class="row">
                             <form method="GET" action="" accept-charset="UTF-8">
-                                <div class="col-sm-3">
-                                    <input type="text" value="{{ Request::get('keyword') }}" placeholder="请输入设备名/客户名进行搜索" name="keyword"class="input-sm form-control">
+                                <div class="col-sm-2">
+                                    <input type="text" value="{{ Request::get('keyword') }}" placeholder="搜索设备名/客户名" name="keyword"class="input-sm form-control">
+                                </div>
+                                <div class="col-sm-2">
+                                    <select class="form-control" name="client_id">
+                                        <option value="none">选择客户名</option>
+                                        @foreach($clients as $client)
+                                            <option value="{{ $client->id }}" {{ Request::get('client_id') == $client->id ? 'selected' : '' }}>{{ $client->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                                 <div class="col-sm-2">
                                     <select class="form-control" name="date">
@@ -53,7 +61,7 @@
                                 <div class="col-sm-2">
                                     <input type="text" class="form-control datepicker" value="{{ Request::get('end_date') }}" placeholder="结束日期" name="end_date"class="input-sm form-control">
                                 </div>
-                                <div class="col-sm-3">
+                                <div class="col-sm-2">
                                     <button type="submit" class="btn btn-primary">搜索</button>
                                 </div>
                             </form>

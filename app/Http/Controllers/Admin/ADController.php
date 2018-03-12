@@ -228,4 +228,11 @@ class ADController extends Controller
         $clients = $list->toArray();
         return response()->json(['status' => 'success', 'clients' => $clients]);
     }
+
+    public function fans(Request $request)
+    {
+        if(!$request->has('id') || ($ad = AD::find($request->input('id'))) == null) return $this->showWarning('找不到广告！');
+        $list = $ad->fans()->paginate();
+        return view('admin.ad.fans', compact('list', 'ad'));
+    }
 }

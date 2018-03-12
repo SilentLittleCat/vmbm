@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\AD;
+use App\Models\Client;
 use App\Models\Device;
 use App\Models\Fan;
 use App\Models\Tissue;
@@ -16,7 +17,14 @@ class TissueController extends Controller
 {
     public function index(Request $request)
     {
-        if($request->has('keyword') && $request->input('keyword')) {
+        if($request->has('client_id') && $request->input('client_id') && $request->input('client_id') != 'none') {
+            $client_id = $request->input('client_id');
+            $list = Device::with(['client'])->orderBy('updated_at', 'desc')->get()->filter(function ($value) use($client_id) {
+                if($value->client && $value->client->id == $client_id) return true;
+                return false;
+            });
+            $list = $this->paginate($list);
+        } else if($request->has('keyword') && $request->input('keyword')) {
             $keyword = $request->input('keyword');
             $list = Device::with(['client'])->orderBy('updated_at', 'desc')->get()->filter(function ($value) use($keyword) {
                 if(!(strpos($value->name, $keyword) === false)) return true;
@@ -81,7 +89,8 @@ class TissueController extends Controller
                 ['created_at', '<=', $end_date]
             ])->get()->count();
         }
-        return view('admin.tissue.index', compact('list', 'fan', 'items'));
+        $clients = Client::all();
+        return view('admin.tissue.index', compact('list', 'fan', 'items', 'clients'));
     }
 
     public function paginate($items, $perPage = 25, $page = null, $options = [])

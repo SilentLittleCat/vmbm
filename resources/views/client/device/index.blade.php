@@ -90,9 +90,6 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{ $item->getWarnInfo($item->id) }}
-                                        </td>
-                                        <td>
                                             @if($item->status == 0)
                                                 <span class="label label-default">离线</span>
                                             @elseif($item->status == 1)
@@ -102,6 +99,9 @@
                                             @else
                                                 <span class="label label-danger">故障</span>
                                             @endif
+                                        </td>
+                                        <td>
+                                            {{ $item->getWarnInfo($item->id) }}
                                         </td>
                                         <td>{{ $item->tissue_num }}</td>
                                         <td>{{ $item->client ? $item->client->name : '无' }}</td>

@@ -95,6 +95,7 @@
                                         <td>
                                             <div class="btn-group">
                                                 {{--<div class="btn btn-sm btn-default btn-client" data-id="{{ $item->id }}">投放客户</div>--}}
+                                                {{--<div class="btn btn-sm btn-default btn-fans" data-id="{{ $item->id }}">粉丝</div>--}}
                                                 <div class="btn btn-sm btn-success btn-up" data-id="{{ $item->id }}">上架</div>
                                                 <div class="btn btn-sm btn-warning btn-down" data-id="{{ $item->id }}">下架</div>
                                                 <div class="btn btn-sm btn-info btn-detail" data-id="{{ $item->id }}">详情</div>
@@ -273,6 +274,9 @@
                 window.location = url;
             }).on('click', '.btn-client', function () {
                 var url = "{{ U('AD/client') }}" + '?id=' + $(this).attr('data-id');
+                window.location = url;
+            }).on('click', '.btn-fans', function () {
+                var url = "{{ U('AD/fans') }}" + '?id=' + $(this).attr('data-id');
                 window.location = url;
             });
 

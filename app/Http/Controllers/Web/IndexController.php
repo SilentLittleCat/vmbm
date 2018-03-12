@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Models\AD;
+use App\Models\ADFan;
 use App\Models\Device;
 use App\Models\Fan;
 use App\Models\Record;
@@ -177,10 +178,55 @@ class IndexController extends Controller
         $user = session('wechat.oauth_user');
         $openId = $user['default']['id'];
 //        $id = Record::orderBy('id', 'desc')->first()->fan_id;
-        $user = Fan::where('wechat_id', $openId)->first();
-        dd($user);
-        if(!$request->has('back_code') || ($ad = AD::where('back_code', $request->input('back_code'))->first()) == null) return view('web.error', ['type' => 'error', 'info' => '未关注公众号！']);
+        $fan = Fan::where('wechat_id', $openId)->first();
+        if(!$fan) return view('web.error', ['type' => 'error', 'info' => '找不到用户！']);
+        $fan->num = $fan->num + 1;
+        if(!$fan->save()) return view('web.error', ['type' => 'error', 'info' => '服务器错误！']);
+        if(!$request->has('back_code')) return view('web.error', ['type' => 'error', 'info' => '领取失败！']);
+        $ad = AD::where('back_code', $request->input('back_code'))->first();
+        if(!$ad) return view('web.error', ['type' => 'error', 'info' => '领取失败！']);
+        $ad->num = $ad->num + 1;
+        $ad->day_num = $ad->day_num + 1;
+        if(!$ad->save()) return view('web.error', ['type' => 'error', 'info' => '服务器错误！']);
+        $record = TissueRecord::where([
+            'fan_id' => $fan->id,
+            'ad_id' => $ad->id,
+            'type' => 0,
+            'status' => 0
+        ])->first();
+        if(!$record) return view('web.error', ['type' => 'error', 'info' => '可能未扫码或者已经领取过！']);
+        $record->status = 1;
+        if(!$record->save()) return view('web.error', ['type' => 'error', 'info' => '服务器错误！']);
+        $scan_record = Record::where('fan_id', $fan->id)->orderBy('id', 'desc')->first();
+        if(!$scan_record) return view('web.error', ['type' => 'error', 'info' => '可能未扫码！']);
+        $res = Tissue::create([
+            'fan_id' => $fan->id,
+            'device_id' => $scan_record->device_id,
+            'ad_id' => $ad->id,
+            'status' => 0,
+            'num' => 1,
+            'money' => 0,
+            'info' => '关注了广告后领取纸巾'
+        ]);
+        ADFan::create([
+            'fan_id' => $fan->id,
+            'ad_id' => $ad->id
+        ]);
+        if(!$res) return view('web.error', ['type' => 'error', 'info' => '服务器错误！']);
+        $device = Device::find($scan_record->device_id);
+        if(!$device) return view('web.error', ['type' => 'error', 'info' => '服务器错误！']);
+        $num = $device->tissue_num - 1;
+        $device->tissue_num = $num;
+        $device->out = 'yes';
+        $item = Setting::where('key', 'lack_tissue_low_limit')->first();
+        if($item && $num <= $item->value) {
+            $device->status = 2;
+        } elseif(!$item && $num <= 10) {
+            $device->status = 2;
+        }
 
+        if(!$device->save()) return view('web.error', ['type' => 'error', 'info' => '服务器错误！']);
+        return view('web.error', ['type' => 'success', 'info' => '领取成功，等待出纸！']);
     }
 
     public function buy(Request $request)
