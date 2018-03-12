@@ -23,9 +23,7 @@
         @endif
         <div class="row">
             <div class="logo col-sm-6 col-sm-offset-3" align="center">
-                <b>长按二维码</b>关注公众号<br>
-                回复<b>纸妹子</b>获取<b>验证码</b><br>
-                回到公众号回复<b>验证码</b><br>
+                <b>长按二维码</b>关注公众号获得领取链接<br>
             </div>
         </div>
     </div>
