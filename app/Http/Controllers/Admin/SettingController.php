@@ -27,7 +27,9 @@ class SettingController extends Controller
         $lack_info = Setting::where('key', 'lack_info')->first();
         $zero_info = Setting::where('key', 'zero_info')->first();
         $error_info = Setting::where('key', 'error_info')->first();
-        return view('admin.setting.edit', compact('tissue_price', 'lack_tissue_low_limit', 'lack_info', 'zero_info', 'error_info'));
+        $buy_get_logo = Setting::where('key', 'buy_get_logo')->first();
+        $buy_get_logo = $buy_get_logo ? $buy_get_logo->value : '/base/img/meizi.jpeg';
+        return view('admin.setting.edit', compact('tissue_price', 'lack_tissue_low_limit', 'lack_info', 'zero_info', 'error_info', 'buy_get_logo'));
     }
 
     public function update(Request $request)

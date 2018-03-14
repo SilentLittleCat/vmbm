@@ -52,7 +52,7 @@
                             <div class="col-sm-6 sg-value">{{ $lack_tissue_low_limit ? $lack_tissue_low_limit->value : '未设置' }}</div>
                         </div>
                         <div class="row sg-item">
-                            <div class="col-sm-2 col-sm-offset-2 sg-label">页面图片</div>
+                            <div class="col-sm-2 col-sm-offset-2 sg-label">页面图片(360 * 360)</div>
                             <div class="col-sm-6 sg-value"><img src="{{ $buy_get_logo }}"></div>
                         </div>
                         {{--<div class="row sg-item">--}}
