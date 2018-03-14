@@ -29,8 +29,8 @@ class ResetPasswordController extends Controller
 
             $request->session()->invalidate();
 
-            return redirect('/');
-//            return view('client.auth.change', ['sg_status' => 'success', 'sg_info' => '操作成功']);
+//            return redirect('/');
+            return view('client.auth.change', ['sg_status' => 'success', 'sg_info' => '操作成功']);
         } else {
             return view('client.auth.change', ['sg_status' => 'fail', 'sg_info' => '操作失败']);
         }
