@@ -8,10 +8,10 @@
     <div class="container">
         <div class="row">
             <div class="logo col-sm-6 col-sm-offset-3" align="center">
-                <img src="{{ $buy_get_logo }}" style="width: 300px;">
+                <img src="{{ $buy_get_logo }}" style="width: 200px;">
             </div>
         </div>
-        <div class="row" style="margin-bottom: 20px">
+        <div class="row" style="margin-bottom: 20px; margin-top: 20px">
             <div class="logo col-sm-6 col-sm-offset-3">
                 <a href="/web/Index/get" class="btn btn-lg btn-success btn-block">领取</a>
             </div>
