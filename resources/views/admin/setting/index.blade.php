@@ -53,7 +53,7 @@
                         </div>
                         <div class="row sg-item">
                             <div class="col-sm-2 col-sm-offset-2 sg-label">页面图片(360 * 360)</div>
-                            <div class="col-sm-6 sg-value"><img src="{{ $buy_get_logo }}"></div>
+                            <div class="col-sm-6 sg-value"><img src="{{ $buy_get_logo }}" width="200px"></div>
                         </div>
                         {{--<div class="row sg-item">--}}
                             {{--<div class="col-sm-2 col-sm-offset-2 sg-label">缺纸告警信息</div>--}}
