@@ -72,11 +72,11 @@
                                     {{--<input class="form-control" type="text" name="error_info" value="{{ $error_info ? $error_info->value : '' }}" placeholder="请输入故障告警信息" required>--}}
                                 {{--</div>--}}
                             {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                                {{--<div class="col-sm-6 col-sm-offset-4">--}}
-                                    {{--<button class="btn btn-primary" type="submit">提交</button>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                                <div class="col-sm-6 col-sm-offset-4">
+                                    <button class="btn btn-primary" type="submit">提交</button>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
