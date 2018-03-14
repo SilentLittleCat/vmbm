@@ -78,6 +78,9 @@ class ResetPasswordController extends Controller
         $result = $user->save();
 
         if($result){
+            Auth::guard('admin')->logout();
+
+            $request->session()->invalidate();
             return $this->showMessage("修改成功");
         }else{
             return $this->showWarning("修改密码失败");
