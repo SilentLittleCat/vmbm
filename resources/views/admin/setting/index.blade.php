@@ -52,17 +52,21 @@
                             <div class="col-sm-6 sg-value">{{ $lack_tissue_low_limit ? $lack_tissue_low_limit->value : '未设置' }}</div>
                         </div>
                         <div class="row sg-item">
-                            <div class="col-sm-2 col-sm-offset-2 sg-label">缺纸告警信息</div>
-                            <div class="col-sm-6 sg-value">{{ $lack_info ? $lack_info->value : '未设置' }}</div>
+                            <div class="col-sm-2 col-sm-offset-2 sg-label">页面图片</div>
+                            <div class="col-sm-6 sg-value"><img src="{{ $buy_get_logo }}"></div>
                         </div>
-                        <div class="row sg-item">
-                            <div class="col-sm-2 col-sm-offset-2 sg-label">零纸巾告警信息</div>
-                            <div class="col-sm-6 sg-value">{{ $zero_info ? $zero_info->value : '未设置' }}</div>
-                        </div>
-                        <div class="row sg-item">
-                            <div class="col-sm-2 col-sm-offset-2 sg-label">故障告警信息</div>
-                            <div class="col-sm-6 sg-value">{{ $error_info ? $error_info->value : '未设置' }}</div>
-                        </div>
+                        {{--<div class="row sg-item">--}}
+                            {{--<div class="col-sm-2 col-sm-offset-2 sg-label">缺纸告警信息</div>--}}
+                            {{--<div class="col-sm-6 sg-value">{{ $lack_info ? $lack_info->value : '未设置' }}</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="row sg-item">--}}
+                            {{--<div class="col-sm-2 col-sm-offset-2 sg-label">零纸巾告警信息</div>--}}
+                            {{--<div class="col-sm-6 sg-value">{{ $zero_info ? $zero_info->value : '未设置' }}</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="row sg-item">--}}
+                            {{--<div class="col-sm-2 col-sm-offset-2 sg-label">故障告警信息</div>--}}
+                            {{--<div class="col-sm-6 sg-value">{{ $error_info ? $error_info->value : '未设置' }}</div>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
             </div>

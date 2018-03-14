@@ -98,7 +98,9 @@ class IndexController extends Controller
             $info = '网页出错！';
             return view('web.error', compact('type', 'info'));
         }
-        return view('web.index.index', compact('json'));
+        $buy_get_logo = Setting::where('key', 'buy_get_logo')->first();
+        $buy_get_logo = $buy_get_logo ? $buy_get_logo->value : '/base/img/meizi.jpeg';
+        return view('web.index.index', compact('json', 'buy_get_logo'));
     }
 
     public function get(Request $request)

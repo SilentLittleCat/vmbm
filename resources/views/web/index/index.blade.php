@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="logo col-sm-6 col-sm-offset-3" align="center">
-                <img src="/base/img/meizi.jpeg">
+                <img src="{{ $buy_get_logo }}">
             </div>
         </div>
         <div class="row" style="margin-bottom: 20px">
