@@ -35,13 +35,20 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         if($request->method() != 'POST') return back();
-        dd($request->all());
+        $buy_get_logo = $request->input('data')['buy_get_logo'];
+        Setting::updateOrCreate([
+            'key' => 'buy_get_logo'
+        ], [
+            'value' => $buy_get_logo
+        ]);
         foreach($request->all() as $key => $value) {
-            Setting::updateOrCreate([
-                'key' => $key
-            ], [
-                'value' => $value
-            ]);
+            if(is_string($value)) {
+                Setting::updateOrCreate([
+                    'key' => $key
+                ], [
+                    'value' => $value
+                ]);
+            }
         }
         return redirect('/admin/Setting/index');
     }
