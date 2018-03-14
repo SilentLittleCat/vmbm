@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container">
-        <div class="row">
+        <div class="row" style="margin-top: 20px">
             <div class="logo col-sm-6 col-sm-offset-3" align="center">
                 <img src="{{ $buy_get_logo }}" style="width: 200px;">
             </div>
