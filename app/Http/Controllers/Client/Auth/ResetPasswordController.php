@@ -25,7 +25,11 @@ class ResetPasswordController extends Controller
         $user = Auth::guard('client')->user();
         $user->password = bcrypt($request->input('password'));
         if($user->save()) {
-            return redirect('/client/logout');
+            Auth::guard('client')->logout();
+
+            $request->session()->invalidate();
+
+            return redirect('/');
 //            return view('client.auth.change', ['sg_status' => 'success', 'sg_info' => '操作成功']);
         } else {
             return view('client.auth.change', ['sg_status' => 'fail', 'sg_info' => '操作失败']);
