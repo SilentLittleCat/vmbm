@@ -35,6 +35,7 @@ class SettingController extends Controller
     public function update(Request $request)
     {
         if($request->method() != 'POST') return back();
+        dd($request->all());
         foreach($request->all() as $key => $value) {
             Setting::updateOrCreate([
                 'key' => $key
