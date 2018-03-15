@@ -39,6 +39,7 @@ class IndexController extends Controller
         $lack_device_cnt = $devices->where('status', 2)->count();
         $zero_device_cnt = $devices->where('tissue_num', 0)->count();
         $error_device_cnt = $devices->where('status', 3)->count();
+        $auth_not_pass = $devices->where('auth_status', 2)->count();
         $devices_cnt = $devices->count();
         $ids = $devices->pluck('id');
 
@@ -90,7 +91,7 @@ class IndexController extends Controller
         });
         $get_cnt = $tissues->where('status', 0)->count();
         $buy_cnt = $tissues->where('status', 1)->count();
-        return view('client.base.index.welcome', compact('devices_cnt', 'off_device_cnt', 'online_device_cnt', 'lack_device_cnt', 'zero_device_cnt', 'error_device_cnt', 'get_cnt', 'buy_cnt'));
+        return view('client.base.index.welcome', compact('devices_cnt', 'off_device_cnt', 'online_device_cnt', 'lack_device_cnt', 'zero_device_cnt', 'error_device_cnt', 'get_cnt', 'buy_cnt', 'auth_not_pass'));
     }
     
     function createAreaDate(){

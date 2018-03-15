@@ -123,6 +123,9 @@
                 language: 'zh-CN',
                 format: "yyyy-mm-dd",
             });
+            @if($auth_not_pass != 0)
+                alert('有设备审核未通过！');
+            @endif
         });
     </script>
 @endsection
