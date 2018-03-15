@@ -92,16 +92,16 @@
                                     {{--</label>--}}
                                 {{--</div>--}}
                             {{--</div>--}}
-                            {{--<div class="form-group">--}}
-                                {{--<label class="col-sm-2 col-sm-offset-2 control-label">客户</label>--}}
-                                {{--<div class="col-sm-6">--}}
-                                    {{--<select class="form-control" name="client_id">--}}
-                                        {{--@foreach($clients as $a_item)--}}
-                                            {{--<option value="{{ $a_item->id }}" @if($a_item->id == $item->client_id) selected @endif><b>{{ $a_item->id . ' ' . $a_item->name }}</b></option>--}}
-                                        {{--@endforeach--}}
-                                    {{--</select>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
+                            <div class="form-group">
+                                <label class="col-sm-2 col-sm-offset-2 control-label">客户</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" name="client_id">
+                                        @foreach($clients as $a_item)
+                                            <option value="{{ $a_item->id }}" @if($a_item->id == $item->client_id) selected @endif><b>{{ $a_item->id . ' ' . $a_item->name }}</b></option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">纸巾数</label>
                                 <div class="col-sm-6">

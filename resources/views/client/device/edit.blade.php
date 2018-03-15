@@ -93,14 +93,6 @@
                                 {{--</div>--}}
                             {{--</div>--}}
                             <div class="form-group">
-                                <label class="col-sm-2 col-sm-offset-2 control-label">客户</label>
-                                <div class="col-sm-6">
-                                    <select class="form-control" name="client_id">
-                                        <input class="form-control" type="text" name="client_id" value="{{ $item->IMEI }}" placeholder="请输入设备编码（IMEI编号）" required>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">纸巾数</label>
                                 <div class="col-sm-6">
                                     <input class="form-control" type="text" name="tissue_num" value="{{ $item->tissue_num }}" placeholder="请输入设备纸巾数" required>
