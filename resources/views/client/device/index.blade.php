@@ -113,7 +113,7 @@
                                                 {{--<div class="btn btn-sm btn-success {{ $item->auth_status == 1 ? 'disabled' : '' }} btn-pass" data-id="{{ $item->id }}">审核通过</div>--}}
                                                 {{--<div class="btn btn-sm btn-warning {{ $item->auth_status == 2 ? 'disabled' : '' }} btn-not-pass" data-id="{{ $item->id }}">审核不过</div>--}}
                                                 <div class="btn btn-sm btn-info btn-detail" data-id="{{ $item->id }}">详情</div>
-                                                {{--<div class="btn btn-sm btn-primary btn-edit" data-id="{{ $item->id }}">编辑</div>--}}
+                                                <div class="btn btn-sm btn-primary btn-edit" data-id="{{ $item->id }}">编辑</div>
                                                 {{--<div class="btn btn-sm btn-danger btn-delete" data-id="{{ $item->id }}">删除</div>--}}
                                                 <div class="btn btn-sm btn-info btn-download" onclick="window.open('/client/Device/download?id={{ $item->id }}', '_target')">二维码下载</div>
                                             </div>
@@ -184,10 +184,10 @@
                 $('#my-modal-label').text('确认删除？');
                 $('#my-modal').modal('show');
             }).on('click', '.btn-detail', function () {
-                var url = 'client/Device/detail?id=' + $(this).attr('data-id');
+                var url = '/client/Device/detail?id=' + $(this).attr('data-id');
                 window.location = url;
             }).on('click', '.btn-edit', function () {
-                var url = "{{ U('Device/edit') }}" + '?id=' + $(this).attr('data-id');
+                var url = '/client/Device/edit=' + $(this).attr('data-id');
                 window.location = url;
             });
 

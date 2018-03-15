@@ -50,12 +50,13 @@ class DeviceController extends Controller
     }
 
 //
-//    public function edit(Request $request)
-//    {
-//        if(!$request->has('id') || ($item = Device::find($request->input('id'))) == null) return back();
+    public function edit(Request $request)
+    {
+        if(!$request->has('id') || ($item = Device::find($request->input('id'))) == null) return back();
+        if(Auth::guard('client')->user()->id != $item->client_id) return back();
 //        $clients = Client::orderBy('updated_at', 'desc')->get();
-//        return view('admin.device.edit', compact('item', 'clients'));
-//    }
+        return view('client.device.edit', compact('item'));
+    }
 
     public function store(Request $request)
     {
@@ -80,16 +81,18 @@ class DeviceController extends Controller
         return $this->showMessage('新建成功！', '/client/Device/index');
     }
 
-//    public function update(Request $request)
-//    {
-//        if($request->method() != 'POST') return back();
-//        if(!$request->has('id') || ($item = Device::find($request->input('id'))) == null) return $this->showWarning('找不到设备！');
-//        $arr = $request->all();
-//        unset($arr['_token']);
-//        $res = Device::where('id', $request->input('id'))->update($arr);
-//        if(!$res) return $this->showWarning('数据库更新失败！');
-//        return $this->showMessage('更新成功！', '/admin/Device/index');
-//    }
+    public function update(Request $request)
+    {
+        if($request->method() != 'POST') return back();
+        if(!$request->has('id') || ($item = Device::find($request->input('id'))) == null) return $this->showWarning('找不到设备！');
+        if(Auth::guard('client')->user()->id != $item->client_id) return back();
+        $arr = $request->all();
+        unset($arr['_token']);
+        $arr['auth_status'] = 0;
+        $res = Device::where('id', $request->input('id'))->update($arr);
+        if(!$res) return $this->showWarning('数据库更新失败！');
+        return $this->showMessage('更新成功！', '/client/Device/index');
+    }
 //
 //    public function changeAuthStatus(Request $request)
 //    {
