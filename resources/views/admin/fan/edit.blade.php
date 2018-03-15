@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-offset-2 control-label">微信昵称</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="wechat_name" value="{{ isset($item) ? $item->wechat_id : '' }}" placeholder="请输入微信名" required readonly>
+                                    <input class="form-control" type="text" name="wechat_name" value="{{ isset($item) ? $item->wechat_name : '' }}" placeholder="请输入微信名" required readonly>
                                 </div>
                             </div>
                             <div class="form-group">
