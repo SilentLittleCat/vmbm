@@ -53,7 +53,7 @@
                         <table class="table table-striped table-bordered table-hover dataTable" id="sg-table">
                             <thead>
                             <tr>
-                                <th>微信名</th>
+                                <th>微信昵称</th>
                                 <th>状态</th>
                                 <th>消费金额</th>
                                 <th>获得纸巾数</th>

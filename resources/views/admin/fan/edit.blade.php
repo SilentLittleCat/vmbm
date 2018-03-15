@@ -36,16 +36,16 @@
                         <form class="form-horizontal" role="form" method="POST" action="{{ U('Fan/update') }}">
                             {{ csrf_field() }}
 
+                            {{--<div class="form-group">--}}
+                                {{--<label class="col-sm-2 col-sm-offset-2 control-label">openid</label>--}}
+                                {{--<div class="col-sm-6">--}}
+                                    {{--<input class="form-control" type="text" name="wechat_id" value="{{ isset($item) ? $item->wechat_id : '' }}" placeholder="请输入微信ID" required>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <div class="form-group">
-                                <label class="col-sm-2 col-sm-offset-2 control-label">微信ID</label>
+                                <label class="col-sm-2 col-sm-offset-2 control-label">微信昵称</label>
                                 <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="wechat_id" value="{{ isset($item) ? $item->wechat_id : '' }}" placeholder="请输入微信ID" required>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 col-sm-offset-2 control-label">微信名</label>
-                                <div class="col-sm-6">
-                                    <input class="form-control" type="text" name="wechat_name" value="{{ isset($item) ? $item->wechat_id : '' }}" placeholder="请输入微信名" required>
+                                    <input class="form-control" type="text" name="wechat_name" value="{{ isset($item) ? $item->wechat_id : '' }}" placeholder="请输入微信名" required readonly>
                                 </div>
                             </div>
                             <div class="form-group">

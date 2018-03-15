@@ -44,11 +44,11 @@
                             </div>
                         </div>
                         <div class="row sg-item">
-                            <div class="col-sm-2 col-sm-offset-2 sg-label">公众号ID</div>
+                            <div class="col-sm-2 col-sm-offset-2 sg-label">openid</div>
                             <div class="col-sm-6 sg-value">{{ $item->wechat_id }}</div>
                         </div>
                         <div class="row sg-item">
-                            <div class="col-sm-2 col-sm-offset-2 sg-label">公众号名称</div>
+                            <div class="col-sm-2 col-sm-offset-2 sg-label">微信昵称</div>
                             <div class="col-sm-6 sg-value">{{ $item->wechat_name }}</div>
                         </div>
                         <div class="row sg-item">
