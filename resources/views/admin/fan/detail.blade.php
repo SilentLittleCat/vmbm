@@ -51,10 +51,10 @@
                             <div class="col-sm-2 col-sm-offset-2 sg-label">微信昵称</div>
                             <div class="col-sm-6 sg-value">{{ $item->wechat_name }}</div>
                         </div>
-                        <div class="row sg-item">
-                            <div class="col-sm-2 col-sm-offset-2 sg-label">消费金额</div>
-                            <div class="col-sm-6 sg-value">{{ $item->money }}</div>
-                        </div>
+                        {{--<div class="row sg-item">--}}
+                            {{--<div class="col-sm-2 col-sm-offset-2 sg-label">消费金额</div>--}}
+                            {{--<div class="col-sm-6 sg-value">{{ $item->money }}</div>--}}
+                        {{--</div>--}}
                         <div class="row sg-item">
                             <div class="col-sm-2 col-sm-offset-2 sg-label">获得纸巾数</div>
                             <div class="col-sm-6 sg-value">{{ $item->num }}</div>

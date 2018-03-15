@@ -55,7 +55,7 @@
                             <tr>
                                 <th>微信昵称</th>
                                 <th>状态</th>
-                                <th>消费金额</th>
+                                {{--<th>消费金额</th>--}}
                                 <th>获得纸巾数</th>
                                 <th>购买纸巾数</th>
                                 <th>领取纸巾数</th>
@@ -65,7 +65,7 @@
                             <tbody>
                             @if(count($list) == 0)
                                 <tr>
-                                    <td colspan="7" class="sg-centered">暂无粉丝！</td>
+                                    <td colspan="6" class="sg-centered">暂无粉丝！</td>
                                 </tr>
                             @else
                                 @foreach($list as $item)
@@ -78,7 +78,7 @@
                                                 <span class="label label-success">关注</span>
                                             @endif
                                         </td>
-                                        <td>{{ $item->money }}</td>
+                                        {{--<td>{{ $item->money }}</td>--}}
                                         <td>{{ $item->num }}</td>
                                         <td>{{ $item->buy_num }}</td>
                                         <td>{{ $item->num - $item->buy_num }}</td>
