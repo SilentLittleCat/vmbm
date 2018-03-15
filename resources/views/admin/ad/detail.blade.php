@@ -89,16 +89,16 @@
                             <div class="col-sm-2 col-sm-offset-2 sg-label">截止日期</div>
                             <div class="col-sm-6 sg-value">{{ $item->end_date }}</div>
                         </div>
-                        <div class="row sg-item">
-                            <div class="col-sm-2 col-sm-offset-2 sg-label">状态</div>
-                            <div class="col-sm-6 sg-value">
-                                @if($item->auth_status == 0)
-                                    <span class="label label-default">下架</span>
-                                @else
-                                    <span class="label label-success">上架</span>
-                                @endif
-                            </div>
-                        </div>
+                        {{--<div class="row sg-item">--}}
+                            {{--<div class="col-sm-2 col-sm-offset-2 sg-label">状态</div>--}}
+                            {{--<div class="col-sm-6 sg-value">--}}
+                                {{--@if($item->auth_status == 0)--}}
+                                    {{--<span class="label label-default">下架</span>--}}
+                                {{--@else--}}
+                                    {{--<span class="label label-success">上架</span>--}}
+                                {{--@endif--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
                     </div>
                 </div>
             </div>

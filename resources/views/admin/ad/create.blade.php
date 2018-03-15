@@ -96,17 +96,17 @@
                                     <input class="form-control datepicker" type="text" name="end_date" value="{{ Request::get('end_date') }}" placeholder="请输入截止日期" required>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 col-sm-offset-2 control-label">状态</label>
-                                <div class="col-sm-6">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="status" value="1" checked>上架
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="status" value="0">下架
-                                    </label>
-                                </div>
-                            </div>
+                            {{--<div class="form-group">--}}
+                                {{--<label class="col-sm-2 col-sm-offset-2 control-label">状态</label>--}}
+                                {{--<div class="col-sm-6">--}}
+                                    {{--<label class="radio-inline">--}}
+                                        {{--<input type="radio" name="status" value="1" checked>上架--}}
+                                    {{--</label>--}}
+                                    {{--<label class="radio-inline">--}}
+                                        {{--<input type="radio" name="status" value="0">下架--}}
+                                    {{--</label>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <div class="form-group">
                                 <div class="col-sm-6 col-sm-offset-4">
                                     <button class="btn btn-primary" type="submit">提交</button>
