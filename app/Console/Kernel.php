@@ -40,6 +40,10 @@ class Kernel extends ConsoleKernel
         $schedule->call(function () {
             $time = Carbon::now()->subHour()->toDateTimeString();
             Device::where('status_date_time', '<', $time)->update(['status' => 3]);
+            Device::where([
+                ['status_date_time', '>', $time],
+                ['status', '!=', 2]
+            ])->update(['status' => 1]);
         })->hourly();
     }
 
