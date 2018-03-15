@@ -187,7 +187,7 @@
                 var url = '/client/Device/detail?id=' + $(this).attr('data-id');
                 window.location = url;
             }).on('click', '.btn-edit', function () {
-                var url = '/client/Device/edit=' + $(this).attr('data-id');
+                var url = '/client/Device/edit?id=' + $(this).attr('data-id');
                 window.location = url;
             });
 
