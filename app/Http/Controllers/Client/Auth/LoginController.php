@@ -63,4 +63,15 @@ class LoginController extends Controller
         }
         $user->save();
     }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+            'captcha' => 'required|captcha'
+        ], [
+            'captcha.captcha' => '验证码错误！'
+        ]);
+    }
 }

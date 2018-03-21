@@ -180,6 +180,7 @@ return [
         Laravel\Passport\PassportServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Overtrue\LaravelWeChat\ServiceProvider::class,
+        Mews\Captcha\CaptchaServiceProvider::class,
     ],
 
     /*
@@ -230,6 +231,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'EasyWeChat' => Overtrue\LaravelWeChat\Facade::class,
+        'Captcha' => Mews\Captcha\Facades\Captcha::class,
     ],
 
 ];

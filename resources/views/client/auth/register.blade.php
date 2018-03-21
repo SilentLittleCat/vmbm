@@ -91,7 +91,7 @@
                             <label class="col-md-4 control-label">密码</label>
 
                             <div class="col-md-6">
-                                <input type="password" class="form-control" name="password" required>
+                                <input type="password" class="form-control" name="password" required placeholder="6位以上">
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">

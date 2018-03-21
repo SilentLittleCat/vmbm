@@ -10,6 +10,12 @@
     <link href="/base/css/font-awesome.min.css"  rel="stylesheet">
     <link href="/base/css/animate.min.css" rel="stylesheet">
     <link href="/base/css/style.min.css"  rel="stylesheet">
+
+    <style type="text/css">
+        .sg-input-item {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 
 <body class="gray-bg">
@@ -22,13 +28,27 @@
             <form class="m-t" role="form" accept-charset="UTF-8" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <input name="name" class="form-control" placeholder="用户名" required="">
+                    <div class="col-sm-12 sg-input-item">
+                        <input name="name" class="form-control" placeholder="用户名" required="">
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="password" name="password" class="form-control" placeholder="密码" required="">
+                    <div class="col-sm-12 sg-input-item">
+                        <input type="password" name="password" class="form-control" placeholder="密码" required="">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-6 sg-input-item">
+                        <input type="text" name="captcha" class="form-control" placeholder="点击图片刷新" required="">
+                    </div>
+                    <div class="col-sm-6 sg-input-item">
+                        <img src="{{ captcha_src() }}" id="captcha-img">
+                    </div>
                 </div>
                 <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
-                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                <div class="col-sm-12 sg-input-item">
+                    <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                </div>
             </form>
         </div>
     </div>
@@ -36,7 +56,20 @@
 <!-- 全局js -->
 <script src="/base/js/jquery-2.1.1.min.js" ></script>
 <script src="/base/js/bootstrap.min.js?v=3.4.0" ></script>
+    <script>
+        $(function () {
+            $('#captcha-img').on('click', function () {
+                var randomLetter = String.fromCharCode(Math.floor(Math.random() * (122 - 97)) + 97);
+                $(this).attr("src", $(this).attr("src") + randomLetter);
+            });
 
+            @if($errors->has('name') || $errors->has('password'))
+                alert('密码错误或者用户不存在！');
+            @elseif($errors->has('captcha'))
+                alert('验证码错误！');
+            @endif
+        });
+    </script>
 
 <!--统计代码，可删除-->
 

@@ -70,11 +70,14 @@ class LoginController extends Controller
 
         $validator = Validator::make($data = $request->all(),
             [
-                'name' => 'required', 'password' => 'required',
+                'name' => 'required',
+                'password' => 'required',
+                'captcha' => 'required|captcha'
             ],
             [
                 'name.required'=>'请输入用户名',
-                'password.required'=>'请输入密码'
+                'password.required'=>'请输入密码',
+                'captcha.captcha' => '验证码错误！'
             ]
         );
 
